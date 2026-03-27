@@ -1,0 +1,4 @@
+*.exe
+junk/
+build/
+db/
