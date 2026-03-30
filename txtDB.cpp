@@ -91,16 +91,45 @@ const attribute transaction::trans_type_Attr(transaction::username_Attr.pos + tr
 const attribute transaction::amount_Attr(transaction::trans_type_Attr.pos + transaction::trans_type_Attr.size, 6);
 const int transaction::lineSize(transaction::amount_Attr.pos + transaction::amount_Attr.size + 2);
 
+struct analytic {
+    static const attribute month_Attr;
+    static const attribute new_user_count_Attr;
+    static const attribute new_application_count_Attr;
+    static const attribute extension_count_Attr;
+    static const attribute pass_price_Attr;
+    static const attribute income_Attr;
+    static const int lineSize;
+
+    int line;
+    int month;
+    int new_user_count;
+    int new_application_count;
+    int extension_count;
+    float pass_price;
+    float income;
+};
+
+const attribute analytic::month_Attr(0, 6);
+const attribute analytic::new_user_count_Attr(analytic::month_Attr.pos + analytic::month_Attr.size, 3);
+const attribute analytic::new_application_count_Attr(analytic::new_user_count_Attr.pos + analytic::new_user_count_Attr.size, 3);
+const attribute analytic::extension_count_Attr(analytic::new_application_count_Attr.pos + analytic::new_application_count_Attr.size, 3);
+const attribute analytic::pass_price_Attr(analytic::extension_count_Attr.pos + analytic::extension_count_Attr.size, 5);
+const attribute analytic::income_Attr(analytic::pass_price_Attr.pos + analytic::pass_price_Attr.size, 8);
+const int analytic::lineSize(analytic::income_Attr.pos + analytic::income_Attr.size + 2);
+
+
 
 void writeAdmin(fstream &file, admin input);
 void writeUser(fstream &file, user input);
 void writeApplication(fstream &file, application input);
 void writeTransaction(fstream &file, transaction input);
+void writeAnalytic(fstream &file, analytic input);
 
 RESULT getAdmin(fstream&, admin&, int);
 RESULT getUser(fstream&, user&, int);
 RESULT getApplication(fstream&, application&, int);
 RESULT getTransaction(fstream&, transaction&, int);
+RESULT getAnalytic(fstream&, analytic&, int);
 
 bool edit (fstream &file, int line, int lineSize, attribute editAttribute, string editValue);
 bool removeRecord(fstream &file, int line, int lineSize);
@@ -108,35 +137,58 @@ bool removeRecord(fstream &file, int line, int lineSize);
 string  strLengthEnforcer(string targetStr, int fillSize);
 
 void writeAdmin(fstream &file, admin input) {
-    string writeLine = "";
-    writeLine.append("\n").append(input.name).append(input.pwd);
+    string writeLine = "\n";
+    writeLine.append(strLengthEnforcer(input.name, input.name_Attr.size));
+    writeLine.append(strLengthEnforcer(input.pwd, input.pwd_Attr.size));
 
     file.seekp(0, fstream::end);
     file.write(writeLine.c_str(), input.lineSize-1);
 }
 
 void writeUser(fstream &file, user input) {
-    string writeLine = "";
-    writeLine.append("\n").append(input.name).append(input.pwd).append(to_string(input.pass)).append(input.car_plate);
+    string writeLine = "\n";
+    writeLine.append(strLengthEnforcer(input.name, input.name_Attr.size));
+    writeLine.append(strLengthEnforcer(input.pwd, input.pwd_Attr.size));
+    writeLine.append(strLengthEnforcer(to_string(input.pass), input.pass_Attr.size));
+    writeLine.append(strLengthEnforcer(input.car_plate, input.car_plate_Attr.size));
 
     file.seekp(0, fstream::end);
     file.write(writeLine.c_str(), input.lineSize-1);
 }
 
 void writeApplication(fstream &file, application input) {
-    string writeLine = "";
-    writeLine.append("\n").append(input.username).append(to_string(input.pass_application)).append(input.car_plate).append(input.status);
+    string writeLine = "\n";
+    writeLine.append(strLengthEnforcer(input.username, input.username_Attr.size));
+    writeLine.append(strLengthEnforcer(to_string(input.pass_application), input.pass_application_Attr.size));
+    writeLine.append(strLengthEnforcer(input.car_plate, input.car_plate_Attr.size));
+    writeLine.append(strLengthEnforcer(input.status, input.status_Attr.size));
 
     file.seekp(0, fstream::end);
     file.write(writeLine.c_str(), input.lineSize-1);
 }
 
 void writeTransaction(fstream &file, transaction input) {
-    string writeLine = "";
-    writeLine.append("\n").append(input.username).append(input.trans_type).append(strLengthEnforcer(to_string(input.amount), input.amount_Attr.size));
+    string writeLine = "\n";
+    writeLine.append(strLengthEnforcer(input.username, input.username_Attr.size));
+    writeLine.append(strLengthEnforcer(input.trans_type, input.trans_type_Attr.size));
+    writeLine.append(strLengthEnforcer(to_string(input.amount), input.amount_Attr.size));
 
     file.seekp(0, fstream::end);
     file.write(writeLine.c_str(), input.lineSize-1);
+}
+
+void writeAnalytic(fstream &file, analytic input) {
+    string writeLine = "\n";
+    writeLine.append(strLengthEnforcer(to_string(input.month), input.month_Attr.size));
+    writeLine.append(strLengthEnforcer(to_string(input.new_user_count), input.new_user_count_Attr.size));
+    writeLine.append(strLengthEnforcer(to_string(input.new_application_count), input.new_application_count_Attr.size));
+    writeLine.append(strLengthEnforcer(to_string(input.extension_count), input.extension_count_Attr.size));
+    writeLine.append(strLengthEnforcer(to_string(input.pass_price), input.pass_price_Attr.size));
+    writeLine.append(strLengthEnforcer(to_string(input.income), input.income_Attr.size));
+
+    file.seekp(0, fstream::end);
+    file.write(writeLine.c_str(), input.lineSize-1);
+
 }
 
 /*
@@ -206,7 +258,7 @@ RESULT getTransaction(fstream &file, transaction &output, int lineNum) {
         }
         
         output.username = line.substr(output.username_Attr.pos, output.username_Attr.size);
-        output.trans_type = stoi(line.substr(output.trans_type_Attr.pos,output.trans_type_Attr.size));
+        output.trans_type =line.substr(output.trans_type_Attr.pos,output.trans_type_Attr.size);
         output.amount = stof(line.substr(output.amount_Attr.pos,output.amount_Attr.size));
         output.line = lineNum;
 
@@ -214,6 +266,28 @@ RESULT getTransaction(fstream &file, transaction &output, int lineNum) {
         
     } else {return END_OF_FILE;}
 }
+
+RESULT getAnalytic(fstream &file, analytic &output, int lineNum) {
+    string line;
+
+    if(getline(file, line)) {
+        if(line[0] == ' ') {
+            return INVALID_RECORD;
+        }
+        
+        output.month = stoi(line.substr(output.month_Attr.pos, output.month_Attr.size));
+        output.new_user_count = stoi(line.substr(output.new_user_count_Attr.pos, output.new_user_count_Attr.size));
+        output.new_application_count = stoi(line.substr(output.new_application_count_Attr.pos, output.new_application_count_Attr.size));
+        output.extension_count = stoi(line.substr(output.extension_count_Attr.pos, output.extension_count_Attr.size));
+        output.pass_price = stof(line.substr(output.pass_price_Attr.pos, output.pass_price_Attr.size));
+        output.income = stof(line.substr(output.income_Attr.pos, output.income_Attr.size));
+        output.line = lineNum;
+
+        return VALID_RECORD;
+        
+    } else {return END_OF_FILE;}
+
+} 
 
 /*
 Need to add function to fill in the string if not long enough to aovid garbage values
@@ -228,6 +302,7 @@ bool edit (fstream &file, int line, int lineSize, attribute editAttribute, strin
         return false;
     }
 
+    editValue = strLengthEnforcer(editValue, editAttribute.size);
     file.write(editValue.c_str(), editAttribute.size);
     return true;
 }
@@ -237,9 +312,15 @@ bool removeRecord(fstream &file, int line, int lineSize) {
 
     string fillString = strLengthEnforcer("", lineSize-2);
 
-    file.seekg(removeLinePosition, fstream::beg);
+    file.seekp(removeLinePosition, fstream::beg);
+
+    if (file.tellp() == -1) {
+        return false;
+    }
 
     file.write(fillString.c_str(), lineSize-2);
+
+    return true;
 }
 
 string  strLengthEnforcer(string targetStr, int fillSize) {
