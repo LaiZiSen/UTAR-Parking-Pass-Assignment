@@ -1,4 +1,4 @@
 - test everything in txtDB
-- Add analytics
+- ~~Add analytics~~
 - Start the actual project
 - Figure out how to export everything
