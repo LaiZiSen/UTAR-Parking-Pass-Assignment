@@ -1,52 +1,13 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <limits>
+#include "include/txtDB.h"
 
 using namespace std;
-
-enum RESULT {
-    VALID_RECORD,
-    INVALID_RECORD, 
-    END_OF_FILE
-};
-
-struct attribute
-{
-    int pos;
-    int size;
-
-    attribute(int pos, int size) : pos(pos), size(size) {};
-};
-
-struct admin {
-    static const attribute name_Attr;
-    static const attribute pwd_Attr;
-    static const int lineSize;
-    
-    int line;
-    string name;
-    string pwd;
-};
 
 const attribute admin::name_Attr(0,8);
 const attribute admin::pwd_Attr(admin::name_Attr.pos + admin::name_Attr.size, 8);
 const int admin::lineSize(admin::pwd_Attr.pos + admin::pwd_Attr.size + 2);
-
-struct user {
-    static const attribute name_Attr;
-    static const attribute pwd_Attr;
-    static const attribute pass_Attr;
-    static const attribute car_plate_Attr;
-    static const int lineSize;
-
-    int line;
-    string name;
-    string pwd;
-    int pass;
-    string car_plate;
-};
-
 
 const attribute user::name_Attr(0, 20);
 const attribute user::pwd_Attr(user::name_Attr.pos + user::name_Attr.size, 8);
@@ -54,60 +15,16 @@ const attribute user::pass_Attr(user::pwd_Attr.pos + user::pwd_Attr.size, 6);
 const attribute user::car_plate_Attr(user::pass_Attr.pos + user::pass_Attr.size, 10);
 const int user::lineSize(user::car_plate_Attr.pos + user::car_plate_Attr.size + 2);
 
-struct application {
-    static const attribute username_Attr;
-    static const attribute pass_application_Attr;
-    static const attribute car_plate_Attr;
-    static const attribute status_Attr;
-    static const int lineSize;
-
-    int line;
-    string username;
-    int pass_application;
-    string car_plate;
-    string status;
-};
-
 const attribute application::username_Attr(0, 20);
 const attribute application::pass_application_Attr(application::username_Attr.pos + application::username_Attr.size, 6);
 const attribute application::car_plate_Attr(application::pass_application_Attr.pos + application::pass_application_Attr.size, 10);
 const attribute application::status_Attr(application::car_plate_Attr.pos + application::car_plate_Attr.size, 3);
 const int application::lineSize(application::status_Attr.pos + application::status_Attr.size + 2);
 
-struct transaction {
-    static const attribute username_Attr;
-    static const attribute trans_type_Attr;
-    static const attribute amount_Attr;
-    static const int lineSize;
-
-    int line;
-    string username;
-    string trans_type;
-    float amount;
-};
-
 const attribute transaction::username_Attr(0,20);
 const attribute transaction::trans_type_Attr(transaction::username_Attr.pos + transaction::username_Attr.size, 3);
 const attribute transaction::amount_Attr(transaction::trans_type_Attr.pos + transaction::trans_type_Attr.size, 6);
 const int transaction::lineSize(transaction::amount_Attr.pos + transaction::amount_Attr.size + 2);
-
-struct analytic {
-    static const attribute month_Attr;
-    static const attribute new_user_count_Attr;
-    static const attribute new_application_count_Attr;
-    static const attribute extension_count_Attr;
-    static const attribute pass_price_Attr;
-    static const attribute income_Attr;
-    static const int lineSize;
-
-    int line;
-    int month;
-    int new_user_count;
-    int new_application_count;
-    int extension_count;
-    float pass_price;
-    float income;
-};
 
 const attribute analytic::month_Attr(0, 6);
 const attribute analytic::new_user_count_Attr(analytic::month_Attr.pos + analytic::month_Attr.size, 3);
@@ -116,25 +33,6 @@ const attribute analytic::extension_count_Attr(analytic::new_application_count_A
 const attribute analytic::pass_price_Attr(analytic::extension_count_Attr.pos + analytic::extension_count_Attr.size, 5);
 const attribute analytic::income_Attr(analytic::pass_price_Attr.pos + analytic::pass_price_Attr.size, 8);
 const int analytic::lineSize(analytic::income_Attr.pos + analytic::income_Attr.size + 2);
-
-
-
-void writeAdmin(fstream &file, admin input);
-void writeUser(fstream &file, user input);
-void writeApplication(fstream &file, application input);
-void writeTransaction(fstream &file, transaction input);
-void writeAnalytic(fstream &file, analytic input);
-
-RESULT getAdmin(fstream&, admin&, int);
-RESULT getUser(fstream&, user&, int);
-RESULT getApplication(fstream&, application&, int);
-RESULT getTransaction(fstream&, transaction&, int);
-RESULT getAnalytic(fstream&, analytic&, int);
-
-bool edit (fstream &file, int line, int lineSize, attribute editAttribute, string editValue);
-bool removeRecord(fstream &file, int line, int lineSize);
-
-string  strLengthEnforcer(string targetStr, int fillSize);
 
 void writeAdmin(fstream &file, admin input) {
     string writeLine = "\n";
@@ -191,9 +89,6 @@ void writeAnalytic(fstream &file, analytic input) {
 
 }
 
-/*
-Gets the admin record from the next line of admin.txt
-*/
 RESULT getAdmin(fstream &file, admin &output, int lineNum) {
     string line;
 
@@ -289,9 +184,6 @@ RESULT getAnalytic(fstream &file, analytic &output, int lineNum) {
 
 } 
 
-/*
-Need to add function to fill in the string if not long enough to aovid garbage values
-*/
 bool edit (fstream &file, int line, int lineSize, attribute editAttribute, string editValue) {
     
     int editPosition = line * lineSize + editAttribute.pos;

@@ -20,6 +20,18 @@ Description
     - TODO.md
     - txtDB.cpp
 
+4. Libraries to be compiled
+
+    - When compiling, run this command
+        ```
+        g++ .\targetFile.cpp .\build\lib1.o .\build\lib2.o -o .\build\executable.exe
+        ```
+
+    - txtDB.cpp
+        ```
+        g++ -c .\txtDB.cpp -o .\build\txtDB.o
+        ```
+
 ### parkingPass.cpp
 ----------------
 Description: This shall be the main program for the MPKJ Monthly Car Parking PAss Management System for UTAR Students.
