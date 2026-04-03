@@ -3,3 +3,4 @@ junk/
 build/
 db/
 test.cpp
+.vscode/
