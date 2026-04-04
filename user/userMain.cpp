@@ -2,7 +2,7 @@
 #include <ctime> //for time function
 #include <string>
 #include <sstream>
-#include "include/txtDB.h"
+#include "../include/txtDB.h"
 
 using namespace std;
 
@@ -11,6 +11,20 @@ const string USER_FILE = "db/user.txt";
 const string ANALYTICS_FILE = "db/analytics.txt";
 const string APPLICATION_FILE = "db/application.txt";
 const string TRANSACTION_FILE = "db/transaction.txt";
+
+//function to remove spaces in txt data
+string trim(const string& input){
+    //find first not space position
+    size_t startPos = input.find_first_not_of(' ');
+    if (startPos == string::npos){
+        return "";
+    }
+    //find text end 
+    size_t endPos = input.find_last_not_of(' ');
+
+    //extract text (start with startPos, length)
+    return input.substr(startPos, endPos-startPos+1);
+}
 
 int getCurrYearMonth(){
     time_t rawtime; //variable to store raw time
@@ -44,6 +58,8 @@ int getCurrYearMonth(){
 }
 
 int main(){
-    cout<<"Current: ";
-    cout<<getCurrYearMonth();
+    // cout<<"Current: ";
+    // cout<<getCurrYearMonth();
+
+    
 }
