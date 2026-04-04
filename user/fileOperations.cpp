@@ -55,40 +55,9 @@ int getCurrYearMonth(){
 string getUserStatus(const string& username){
     int currentDate = getCurrYearMonth();
 
-    //check file is open or not
-    fstream appFile(APPLICATION_FILE, ios::in);
-    if (!appFile.is_open()) {
-        return "NO PASS";
-    }
 
-    application tempApp; //container to hold one record
-    int lineNum = 0; //start at first line
-    RESULT result; //result status of each read
-    
-    while (true) {
-        //loop through all app record (push data into tempApp, result tells if read was successful)
-        result = getApplication(appFile, tempApp, lineNum);
-        
-        //exit loop if finish reading every line in txt
-        if (result == END_OF_FILE) break;
-        
-        if (result == VALID_RECORD) {
-            string fileUsername = trim(tempApp.username);
-            
-            if (fileUsername == username) {
-                if (tempApp.status == "APV") {
-                    if (tempApp.pass_application < currentDate) {
-                        return "EXPIRED";
-                    } else if (tempApp.pass_application <= addMonths(currentDate, 1)) {
-                        return "ALMOST_EXPIRED";
-                    } else {
-                        return "ACTIVE";
-                    }
-                } else if (tempApp.status == "PND") {
-                    return "PENDING";
-                }
-            }
-        }
-        lineNum++;
-    }
+}
+
+int main(){
+
 }
