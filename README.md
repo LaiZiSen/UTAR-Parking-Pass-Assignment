@@ -14,11 +14,15 @@ Description
         - transaction.txt
         - user.txt
         - analytics.txt
+    - header
+        - txtDB.h
+    - include
+        - txtDB.cpp
     - checkPass.cpp
     - parkingPass.cpp
     - README.md
     - TODO.md
-    - txtDB.cpp
+    - cheatsheet.md
 
 4. Libraries to be compiled
 
