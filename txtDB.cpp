@@ -11,19 +11,23 @@ const int admin::lineSize(admin::pwd_Attr.pos + admin::pwd_Attr.size + 2);
 
 const attribute user::name_Attr(0, 20);
 const attribute user::pwd_Attr(user::name_Attr.pos + user::name_Attr.size, 8);
-const attribute user::pass_Attr(user::pwd_Attr.pos + user::pwd_Attr.size, 6);
+const attribute user::faculty_Attr(user::pwd_Attr.pos + user::pwd_Attr.size, 6);
+const attribute user::pass_Attr(user::faculty_Attr.pos + user::faculty_Attr.size, 6);
 const attribute user::car_plate_Attr(user::pass_Attr.pos + user::pass_Attr.size, 10);
 const int user::lineSize(user::car_plate_Attr.pos + user::car_plate_Attr.size + 2);
 
 const attribute application::username_Attr(0, 20);
 const attribute application::pass_application_Attr(application::username_Attr.pos + application::username_Attr.size, 6);
 const attribute application::car_plate_Attr(application::pass_application_Attr.pos + application::pass_application_Attr.size, 10);
-const attribute application::status_Attr(application::car_plate_Attr.pos + application::car_plate_Attr.size, 3);
-const int application::lineSize(application::status_Attr.pos + application::status_Attr.size + 2);
+const attribute application::type_Attr(application::car_plate_Attr.pos + application::car_plate_Attr.size, 3);
+const attribute application::status_Attr(application::type_Attr.pos + application::type_Attr.size, 3);
+const attribute application::date_Attr(application::status_Attr.pos + application::status_Attr.size, 6);
+const int application::lineSize(application::date_Attr.pos + application::date_Attr.size + 2);
 
 const attribute transaction::username_Attr(0,20);
 const attribute transaction::trans_type_Attr(transaction::username_Attr.pos + transaction::username_Attr.size, 3);
-const attribute transaction::amount_Attr(transaction::trans_type_Attr.pos + transaction::trans_type_Attr.size, 6);
+const attribute transaction::date_Attr(transaction::trans_type_Attr.pos + transaction::trans_type_Attr.size, 6);
+const attribute transaction::amount_Attr(transaction::date_Attr.pos + transaction::date_Attr.size, 6);
 const int transaction::lineSize(transaction::amount_Attr.pos + transaction::amount_Attr.size + 2);
 
 const attribute analytic::month_Attr(0, 6);
@@ -47,6 +51,7 @@ void writeUser(fstream &file, user input) {
     string writeLine = "\n";
     writeLine.append(strLengthEnforcer(input.name, input.name_Attr.size));
     writeLine.append(strLengthEnforcer(input.pwd, input.pwd_Attr.size));
+    writeLine.append(strLengthEnforcer(input.faculty, input.faculty_Attr.size));
     writeLine.append(strLengthEnforcer(to_string(input.pass), input.pass_Attr.size));
     writeLine.append(strLengthEnforcer(input.car_plate, input.car_plate_Attr.size));
 
@@ -59,7 +64,9 @@ void writeApplication(fstream &file, application input) {
     writeLine.append(strLengthEnforcer(input.username, input.username_Attr.size));
     writeLine.append(strLengthEnforcer(to_string(input.pass_application), input.pass_application_Attr.size));
     writeLine.append(strLengthEnforcer(input.car_plate, input.car_plate_Attr.size));
+    writeLine.append(strLengthEnforcer(input.type, input.type_Attr.size));
     writeLine.append(strLengthEnforcer(input.status, input.status_Attr.size));
+    writeLine.append(strLengthEnforcer(to_string(input.date), input.date_Attr.size));
 
     file.seekp(0, fstream::end);
     file.write(writeLine.c_str(), input.lineSize-1);
@@ -69,6 +76,7 @@ void writeTransaction(fstream &file, transaction input) {
     string writeLine = "\n";
     writeLine.append(strLengthEnforcer(input.username, input.username_Attr.size));
     writeLine.append(strLengthEnforcer(input.trans_type, input.trans_type_Attr.size));
+    writeLine.append(strLengthEnforcer(to_string(input.date), input.date_Attr.size));
     writeLine.append(strLengthEnforcer(to_string(input.amount), input.amount_Attr.size));
 
     file.seekp(0, fstream::end);
@@ -86,7 +94,6 @@ void writeAnalytic(fstream &file, analytic input) {
 
     file.seekp(0, fstream::end);
     file.write(writeLine.c_str(), input.lineSize-1);
-
 }
 
 RESULT getAdmin(fstream &file, admin &output, int lineNum) {
@@ -116,6 +123,7 @@ RESULT getUser(fstream &file, user &output, int lineNum) {
         
         output.name = line.substr(output.name_Attr.pos, output.name_Attr.size);
         output.pwd = line.substr(output.pwd_Attr.pos,output.pwd_Attr.size);
+        output.faculty = line.substr(output.faculty_Attr.pos, output.faculty_Attr.size);
         output.pass = stoi(line.substr(output.pass_Attr.pos,output.pass_Attr.size));
         output.car_plate = line.substr(output.car_plate_Attr.pos,output.car_plate_Attr.size);
         output.line = lineNum;
@@ -136,7 +144,9 @@ RESULT getApplication(fstream &file, application &output, int lineNum) {
         output.username = line.substr(output.username_Attr.pos, output.username_Attr.size);
         output.pass_application = stoi(line.substr(output.pass_application_Attr.pos,output.pass_application_Attr.size));
         output.car_plate = line.substr(output.car_plate_Attr.pos,output.car_plate_Attr.size);
+        output.type = line.substr(output.type_Attr.pos, output.type_Attr.size);
         output.status = line.substr(output.status_Attr.pos,output.status_Attr.size);
+        output.date = stoi(line.substr(output.date_Attr.pos, output.date_Attr.size));
         output.line = lineNum;
 
         return VALID_RECORD;
@@ -154,6 +164,7 @@ RESULT getTransaction(fstream &file, transaction &output, int lineNum) {
         
         output.username = line.substr(output.username_Attr.pos, output.username_Attr.size);
         output.trans_type =line.substr(output.trans_type_Attr.pos,output.trans_type_Attr.size);
+        output.date = stoi(line.substr(output.date_Attr.pos, output.date_Attr.size));
         output.amount = stof(line.substr(output.amount_Attr.pos,output.amount_Attr.size));
         output.line = lineNum;
 
@@ -181,8 +192,7 @@ RESULT getAnalytic(fstream &file, analytic &output, int lineNum) {
         return VALID_RECORD;
         
     } else {return END_OF_FILE;}
-
-} 
+}
 
 bool edit (fstream &file, int line, int lineSize, attribute editAttribute, string editValue) {
     
@@ -196,6 +206,7 @@ bool edit (fstream &file, int line, int lineSize, attribute editAttribute, strin
 
     editValue = strLengthEnforcer(editValue, editAttribute.size);
     file.write(editValue.c_str(), editAttribute.size);
+
     return true;
 }
 

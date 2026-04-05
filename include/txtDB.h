@@ -6,7 +6,7 @@
 
 enum RESULT {
     VALID_RECORD,
-    INVALID_RECORD, 
+    INVALID_RECORD,
     END_OF_FILE
 };
 
@@ -31,6 +31,7 @@ struct admin {
 struct user {
     static const attribute name_Attr;
     static const attribute pwd_Attr;
+    static const attribute faculty_Attr;
     static const attribute pass_Attr;
     static const attribute car_plate_Attr;
     static const int lineSize;
@@ -38,6 +39,7 @@ struct user {
     int line;
     std::string name;
     std::string pwd;
+    std::string faculty;
     int pass;
     std::string car_plate;
 };
@@ -46,25 +48,31 @@ struct application {
     static const attribute username_Attr;
     static const attribute pass_application_Attr;
     static const attribute car_plate_Attr;
+    static const attribute type_Attr;
     static const attribute status_Attr;
+    static const attribute date_Attr;
     static const int lineSize;
 
     int line;
     std::string username;
     int pass_application;
     std::string car_plate;
+    std::string type;
     std::string status;
+    int date;
 };
 
 struct transaction {
     static const attribute username_Attr;
     static const attribute trans_type_Attr;
+    static const attribute date_Attr;
     static const attribute amount_Attr;
     static const int lineSize;
 
     int line;
     std::string username;
     std::string trans_type;
+    int date;
     float amount;
 };
 

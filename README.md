@@ -54,13 +54,18 @@ There are five text files maanged with different formats
 
 - Username 20 letters
 - User password 8 letters
+- Faculty 6 letter
+- Parking Pass 6 letter
+- Car plate 10 letter
 
 3. application.txt
 
 - Username 20 letters
 - Pass aplication 6 numbers
 - Car plate 10 letters
+- Type 3 letters
 - Status 3 letters
+- Date 6 Digits
 
 4. analytics.txt
 
@@ -75,4 +80,5 @@ There are five text files maanged with different formats
 
 - Username 20 letter
 - Type (INC/ RFD) 3 letters
+- Date 6 digits
 - Amount 5 letters
