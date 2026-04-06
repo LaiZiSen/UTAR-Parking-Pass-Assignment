@@ -240,3 +240,14 @@ string  strLengthEnforcer(string targetStr, int fillSize) {
 
     return targetStr;
 }
+
+//function to remove spaces in txt data
+string trim(const string& input){
+    size_t startPos = input.find_first_not_of(' ');
+    if (startPos == string::npos){
+        return "";
+    }
+    size_t endPos = input.find_last_not_of(' ');
+
+    return input.substr(startPos, endPos-startPos+1);
+}
