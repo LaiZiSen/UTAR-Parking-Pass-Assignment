@@ -4,6 +4,16 @@
 #include <string>
 #include <fstream>
 
+#define appTypeRNW "RNW"
+#define appTypeRJT "RJT"
+
+#define appStatusPND "PND"
+#define appStatusAPV "APV"
+#define appStatusRJT "RJT"
+
+#define transTypeINC "INC"
+#define transTypeRFD "RFD"
+
 enum RESULT {
     VALID_RECORD,
     INVALID_RECORD,
