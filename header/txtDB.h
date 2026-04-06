@@ -31,6 +31,7 @@ struct admin {
 struct user {
     static const attribute name_Attr;
     static const attribute pwd_Attr;
+    static const attribute id_Attr;
     static const attribute faculty_Attr;
     static const attribute pass_Attr;
     static const attribute car_plate_Attr;
@@ -39,6 +40,7 @@ struct user {
     int line;
     std::string name;
     std::string pwd;
+    int id;
     std::string faculty;
     int pass;
     std::string car_plate;

@@ -11,7 +11,8 @@ const int admin::lineSize(admin::pwd_Attr.pos + admin::pwd_Attr.size + 2);
 
 const attribute user::name_Attr(0, 20);
 const attribute user::pwd_Attr(user::name_Attr.pos + user::name_Attr.size, 8);
-const attribute user::faculty_Attr(user::pwd_Attr.pos + user::pwd_Attr.size, 6);
+const attribute user::id_Attr(user::pwd_Attr.pos + user::pwd_Attr.size, 7);
+const attribute user::faculty_Attr(user::id_Attr.pos + user::id_Attr.size, 6);
 const attribute user::pass_Attr(user::faculty_Attr.pos + user::faculty_Attr.size, 6);
 const attribute user::car_plate_Attr(user::pass_Attr.pos + user::pass_Attr.size, 10);
 const int user::lineSize(user::car_plate_Attr.pos + user::car_plate_Attr.size + 2);
