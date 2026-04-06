@@ -4,4 +4,3 @@ build/
 db/
 test.cpp
 .vscode/
-sr_test/

@@ -2,8 +2,8 @@
 #include <fstream>
 #include <ctime>
 #include <string>
-#include "../include/txtPath.h"
-#include "../include/txtDB.h"
+#include "../header/txtPath.h"
+#include "../header/txtDB.h"
 
 //1. function to remove spaces in txt data
 string trim(const string& input){
