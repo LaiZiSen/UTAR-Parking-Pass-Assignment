@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <ctime>
 #include "../header/txtDB.h"
 
 using namespace std;
@@ -263,25 +264,25 @@ int getCurrYearMonth(){
 
     int resultInYearMonth = yearNow * 100 + monthNow;
 
-    //separate year and month
-    int year = resultInYearMonth/100;
-    int month = resultInYearMonth%100;
-
-    //handle overflow
-    while (month>12){
-        month -= 12;
-        year ++;
-    }
-    
-    while (month<1){
-        month += 12;
-        year --;
-    }
-
-    return year * 100 + month;
+    return resultInYearMonth;
 }
 
-int getCurrDate(){
+int getCurrYYMMDD(){
+    time_t rawtime; 
+    time(&rawtime); 
+    struct tm* timeinfo; 
+    timeinfo = localtime(&rawtime); 
+
+    int yearNow = timeinfo->tm_year - 100; 
+    int monthNow = timeinfo->tm_mon + 1; 
+    int dayNow = timeinfo->tm_mday;
+
+    int resultInYearMonthDay = yearNow * 10000 + monthNow * 100 + dayNow;
+
+    return resultInYearMonthDay;
+}
+
+int getCurrDay(){
     time_t rawtime;
     time(&rawtime);
     struct tm* timeinfo;

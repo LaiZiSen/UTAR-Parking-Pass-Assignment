@@ -8,7 +8,7 @@
 using namespace std;
 
 int getCurrYearMonth();
-int getCurrDate();
+int getCurrDay();
 
 int main(){
     fstream userFile(USER_FILE, ios::in);
