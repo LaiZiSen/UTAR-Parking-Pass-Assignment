@@ -124,4 +124,8 @@ bool removeRecord(std::fstream &file, int line, int lineSize);
 std::string  strLengthEnforcer(std::string targetStr, int fillSize);
 std::string trim(const std::string& input);
 
+int getCurrYearMonth();
+int getCurrYYMMDD();
+int getCurrDay();
+
 #endif
