@@ -113,6 +113,7 @@ std::string  strLengthEnforcer(std::string targetStr, int fillSize);
 std::string trim(const std::string& input);
 
 int getCurrYearMonth();
-int getCurrDate();
+int getCurrYYMMDD();
+int getCurrDay();
 
 #endif
