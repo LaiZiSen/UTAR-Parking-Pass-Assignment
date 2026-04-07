@@ -251,3 +251,42 @@ string trim(const string& input){
 
     return input.substr(startPos, endPos-startPos+1);
 }
+
+//function to track time now
+int getCurrYearMonth(){
+    time_t rawtime; 
+    time(&rawtime); 
+    struct tm* timeinfo; 
+    timeinfo = localtime(&rawtime); 
+
+    int yearNow = timeinfo->tm_year + 1900; 
+    int monthNow = timeinfo->tm_mon + 1; 
+
+    int resultInYearMonth = yearNow * 100 + monthNow;
+
+    return resultInYearMonth;
+}
+
+int getCurrYYMMDD(){
+    time_t rawtime; 
+    time(&rawtime); 
+    struct tm* timeinfo; 
+    timeinfo = localtime(&rawtime); 
+
+    int yearNow = timeinfo->tm_year - 100; 
+    int monthNow = timeinfo->tm_mon + 1; 
+    int dayNow = timeinfo->tm_mday;
+
+    int resultInYearMonthDay = yearNow * 10000 + monthNow * 100 + dayNow;
+
+    return resultInYearMonthDay;
+}
+
+int getCurrDay(){
+    time_t rawtime;
+    time(&rawtime);
+    struct tm* timeinfo;
+    timeinfo = localtime(&rawtime);
+
+    return timeinfo -> tm_mday;
+}
