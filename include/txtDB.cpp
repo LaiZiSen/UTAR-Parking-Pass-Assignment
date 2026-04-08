@@ -124,6 +124,7 @@ RESULT getUser(fstream &file, user &output, int lineNum) {
         }
         
         output.name = line.substr(output.name_Attr.pos, output.name_Attr.size);
+        output.id = stoi(line.substr(output.id_Attr.pos, output.id_Attr.size));
         output.pwd = line.substr(output.pwd_Attr.pos,output.pwd_Attr.size);
         output.faculty = line.substr(output.faculty_Attr.pos, output.faculty_Attr.size);
         output.pass = stoi(line.substr(output.pass_Attr.pos,output.pass_Attr.size));
