@@ -138,7 +138,7 @@ bool loginUser(user &outputUser){
     }
 }
 
-bool loginUser(admin &outputAdmin){
+bool loginAdmin(admin &outputAdmin){
     string inputName;
     admin adminObj;
 
