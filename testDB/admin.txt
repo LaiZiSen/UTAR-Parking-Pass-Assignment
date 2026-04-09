@@ -1,3 +1,0 @@
-admin   Password
-root    password
-12345678abcdefgh
