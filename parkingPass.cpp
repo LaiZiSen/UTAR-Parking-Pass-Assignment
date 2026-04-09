@@ -1,6 +1,9 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include "header/generalFunc.h"
+#include "header/txtDB.h"
+#include "header/login.h"
 
 using namespace std;
 
@@ -12,15 +15,6 @@ void printGeneralMenu() {
     cout << "3. Login as Admin" << endl;
     cout << "4. Register" << endl; 
     cout << "5. Exit Program" << endl;
-}
-
-char getChoice(){
-    cout << "Enter a number for your option:  ";
-    
-    char output;
-    cin >> output;
-
-    return output;
 }
 
 void printDescription() {
@@ -36,15 +30,21 @@ int main () {
         printGeneralMenu();
         choice = getChoice();
 
+        user userObj;
+        admin adminObj;
         switch (choice) {
             case '1':
                 printDescription();
                 break;
             case '2':
-                // Login as User
+                if (loginUser(userObj)) {
+                    cout << "ENTER USER UI AS " << userObj.name;
+                } 
                 break;
             case '3':
-                // Login as Admin
+                if (loginAdmin(adminObj)) {
+                    cout << "ENTER ADMIN UI AS " << adminObj.name;
+                }
                 break;
             case '4':
                 // Register user account
@@ -57,7 +57,5 @@ int main () {
                 cout << "Invalid option, enter anotehr number" << endl;
                 break;
         }
-
     }
-
 }
