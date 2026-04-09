@@ -4,31 +4,13 @@
 #include <limits>
 #include "../header/txtDB.h"
 #include "../header/txtPath.h"
+#include "../header/generalFunc.h"
 
 using namespace std;
 
 bool loginUser(user &);
 
 bool loginAdmin(admin &);
-
-char getChoice(){
-    cout << "Enter a number for your option:  ";
-    
-    char output;
-    cin >> output;
-
-    return output;
-}
-
-string getLineInput(attribute attributeWanted) {
-    string outputStr;
-    getline(cin, outputStr);
-
-    outputStr = trim(outputStr);
-    outputStr = strLengthEnforcer(outputStr, attributeWanted.size);
-
-    return outputStr;
-}
 
 bool searchUser(user &outputUser, string inputName) {
     fstream userFile(USER_FILE);
