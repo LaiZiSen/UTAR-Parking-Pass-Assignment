@@ -2,7 +2,9 @@
 #include <fstream>
 #include <string>
 #include <ctime>
+#include <bits/stdc++.h>
 #include "../header/txtDB.h"
+#include "../header/txtPath.h"
 
 using namespace std;
 
@@ -227,6 +229,67 @@ bool removeRecord(fstream &file, int line, int lineSize) {
     file.write(fillString.c_str(), lineSize-2);
 
     return true;
+}
+
+bool searchUser(user &outputUser, string inputName) {
+    fstream userFile(USER_FILE);
+    int lineNum = 0;
+    user userObj;
+    
+    transform(inputName.begin(), inputName.end(), inputName.begin(), ::toupper);
+
+    bool foundUser = false;
+    while(!userFile.eof() && !foundUser) {
+        RESULT result = getUser(userFile, userObj, lineNum);
+        lineNum++;
+
+        if(result != VALID_RECORD) continue;
+
+        string username = userObj.name;
+        transform(username.begin(), username.end(), username.begin(), ::toupper);
+
+        if(username.compare(inputName) == 0) {
+            outputUser = userObj; 
+            userFile.close();
+            return true;
+        } else {
+            continue;
+        };
+    }
+    return false;
+
+    userFile.close();
+}
+
+bool searchAdmin(admin &outputAdmin, string inputName) {
+    fstream adminFile(ADMIN_FILE);
+    int lineNum = 0;
+    admin adminObj;
+    
+    transform(inputName.begin(), inputName.end(), inputName.begin(), ::toupper);
+    cout << inputName << endl;
+
+    bool foundUser = false;
+    while(!adminFile.eof() && !foundUser) {
+        RESULT result = getAdmin(adminFile, adminObj, lineNum);
+        lineNum++;
+
+        if(result != VALID_RECORD) continue;
+
+        string adminName = adminObj.name;
+        transform(adminName.begin(), adminName.end(), adminName.begin(), ::toupper);
+        
+        if(adminName.compare(inputName) == 0) {
+            outputAdmin = adminObj; 
+            adminFile.close();
+            return true;
+        } else {
+            continue;
+        };
+    }
+    return false;
+
+    adminFile.close();
 }
 
 string  strLengthEnforcer(string targetStr, int fillSize) {
