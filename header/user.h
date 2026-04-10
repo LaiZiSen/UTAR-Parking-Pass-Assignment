@@ -7,5 +7,7 @@ using namespace std;
 // Function declarations (prototypes only)
 string userLogin();
 void userUI(string username);
+void checkStatus(string username);
+void checkTransHistory(string username);
 
 #endif
