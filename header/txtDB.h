@@ -121,6 +121,9 @@ RESULT getAnalytic(std::fstream&, analytic&, int);
 bool edit (std::fstream &file, int line, int lineSize, attribute editAttribute, std::string editValue);
 bool removeRecord(std::fstream &file, int line, int lineSize);
 
+bool searchUser(user &outputUser, std::string inputName);
+bool searchAdmin(admin &outputAdmin, std::string inputName);
+
 std::string  strLengthEnforcer(std::string targetStr, int fillSize);
 std::string trim(const std::string& input);
 
