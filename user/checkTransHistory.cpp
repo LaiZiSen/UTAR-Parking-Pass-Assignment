@@ -56,22 +56,3 @@ void checkTransHistory(string username){
         cout<<"Record not found.";
     }
 }
-
-int main(){
-    string username = userLogin();
-    char choice;
-    cout<<"1. check status\n";
-    cout<<"2. check transaction history\n";
-    cin>>choice;
-
-    switch (choice){
-        case '1':
-            checkStatus(username);
-            break;
-        case '2':
-            checkTransHistory(username);
-            break;
-    }
-
-    return 0;
-}
