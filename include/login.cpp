@@ -2,6 +2,7 @@
 #include <string>
 #include <fstream>
 #include <limits>
+#include <bits/stdc++.h>
 #include "../header/txtDB.h"
 #include "../header/txtPath.h"
 #include "../header/generalFunc.h"
@@ -16,6 +17,8 @@ bool searchUser(user &outputUser, string inputName) {
     fstream userFile(USER_FILE);
     int lineNum = 0;
     user userObj;
+    
+    transform(inputName.begin(), inputName.end(), inputName.begin(), ::toupper);
 
     bool foundUser = false;
     while(!userFile.eof() && !foundUser) {
@@ -23,7 +26,11 @@ bool searchUser(user &outputUser, string inputName) {
         lineNum++;
 
         if(result != VALID_RECORD) continue;
-        if(userObj.name.compare(inputName) == 0) {
+
+        string username = userObj.name;
+        transform(username.begin(), username.end(), username.begin(), ::toupper);
+
+        if(username.compare(inputName) == 0) {
             outputUser = userObj; 
             userFile.close();
             return true;
@@ -40,6 +47,9 @@ bool searchAdmin(admin &outputAdmin, string inputName) {
     fstream adminFile(ADMIN_FILE);
     int lineNum = 0;
     admin adminObj;
+    
+    transform(inputName.begin(), inputName.end(), inputName.begin(), ::toupper);
+    cout << inputName << endl;
 
     bool foundUser = false;
     while(!adminFile.eof() && !foundUser) {
@@ -47,7 +57,11 @@ bool searchAdmin(admin &outputAdmin, string inputName) {
         lineNum++;
 
         if(result != VALID_RECORD) continue;
-        if(adminObj.name.compare(inputName) == 0) {
+
+        string adminName = adminObj.name;
+        transform(adminName.begin(), adminName.end(), adminName.begin(), ::toupper);
+        
+        if(adminName.compare(inputName) == 0) {
             outputAdmin = adminObj; 
             adminFile.close();
             return true;
@@ -69,6 +83,7 @@ bool loginUser(user &outputUser){
     bool userNameExist = false;
     while(!userNameExist) {
         cout << "Enter your Username:  ";
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         inputName = getLineInput(userObj.name_Attr);
 
         userNameExist = searchUser(userObj, inputName);
@@ -129,6 +144,7 @@ bool loginAdmin(admin &outputAdmin){
     bool adminNameExist = false;
     while(!adminNameExist) {
         cout << "Enter your Admin Name:  ";
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         inputName = getLineInput(adminObj.name_Attr);
 
         adminNameExist = searchAdmin(adminObj, inputName);
@@ -174,7 +190,6 @@ bool loginAdmin(admin &outputAdmin){
                 case '2':
                     return false;
             }   
-
         }
 
     }
