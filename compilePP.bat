@@ -1,0 +1,1 @@
+g++ parkingPass.cpp ./include/login.cpp ./include/generalFunc.cpp ./include/txtDB.cpp -o parkingPass.exe
