@@ -18,30 +18,18 @@ bool loginUser(user &outputUser){
     user userObj;
 
     cout << endl << "USER LOGIN" << endl;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
     bool userNameExist = false;
     while(!userNameExist) {
         cout << "Enter your Username:  ";
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         inputName = getLineInput(userObj.name_Attr);
 
         userNameExist = searchUser(userObj, inputName);
         if (!userNameExist) {
-            char choice;
-
             cout << "Username not found" << endl;
-            cout << "Do you want to continue? (1) " << endl;
-            cout << "Or Quit Login (2)" << endl;
-
-            choice = getChoice();
-            switch(choice) {
-                case '1':
-                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                    continue;
-                case '2':
-                    return false;
-            }   
         }
+        cout << endl;
     }
 
     bool matchedPwd = false;
@@ -52,25 +40,11 @@ bool loginUser(user &outputUser){
 
         if(userObj.pwd.compare(inputPwd) == 0) {
             outputUser = userObj;
+            cout << endl;
             return true;
         } else {
-            char choice;
-
-            cout << "Wrong Password" << endl;
-            cout << "Do you want to continue? (1) " << endl;
-            cout << "Or Quit Login (2)" << endl;
-
-            choice = getChoice();
-            switch(choice) {
-                case '1':
-                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                    continue;
-                case '2':
-                    return false;
-            }   
-
+            cout << "Wrong Password" << endl << endl;
         }
-
     }
 }
 
@@ -79,30 +53,18 @@ bool loginAdmin(admin &outputAdmin){
     admin adminObj;
 
     cout << endl << "ADMIN LOGIN" << endl;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
     bool adminNameExist = false;
     while(!adminNameExist) {
         cout << "Enter your Admin Name:  ";
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         inputName = getLineInput(adminObj.name_Attr);
 
         adminNameExist = searchAdmin(adminObj, inputName);
         if (!adminNameExist) {
-            char choice;
-
             cout << "Admin Name not found" << endl;
-            cout << "Do you want to continue? (1) " << endl;
-            cout << "Or Quit Login (2)" << endl;
-
-            choice = getChoice();
-            switch(choice) {
-                case '1':
-                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                    continue;
-                case '2':
-                    return false;
-            }   
         }
+        cout << endl;
     }
 
     bool matchedPwd = false;
@@ -113,22 +75,10 @@ bool loginAdmin(admin &outputAdmin){
 
         if(adminObj.pwd.compare(inputPwd) == 0) {
             outputAdmin = adminObj;
+            cout << endl;
             return true;
         } else {
-            char choice;
-
-            cout << "Wrong Password" << endl;
-            cout << "Do you want to continue? (1) " << endl;
-            cout << "Or Quit Login (2)" << endl;
-
-            choice = getChoice();
-            switch(choice) {
-                case '1':
-                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                    continue;
-                case '2':
-                    return false;
-            }   
+            cout << "Wrong Password" << endl << endl;
         }
 
     }
