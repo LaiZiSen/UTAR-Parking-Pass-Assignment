@@ -14,7 +14,7 @@ void printGeneralMenu() {
     cout << "2. Login as User" << endl;
     cout << "3. Login as Admin" << endl;
     cout << "4. Register" << endl; 
-    cout << "5. Exit Program" << endl;
+    cout << "5. Exit Program" << endl << endl;
 }
 
 void printDescription() {
@@ -38,12 +38,12 @@ int main () {
                 break;
             case '2':
                 if (loginUser(userObj)) {
-                    cout << "ENTER USER UI AS " << userObj.name;
+                    cout << "ENTER USER UI AS " << userObj.name << endl;
                 } 
                 break;
             case '3':
                 if (loginAdmin(adminObj)) {
-                    cout << "ENTER ADMIN UI AS " << adminObj.name;
+                    cout << "ENTER ADMIN UI AS " << adminObj.name << endl;
                 }
                 break;
             case '4':

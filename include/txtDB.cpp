@@ -267,7 +267,6 @@ bool searchAdmin(admin &outputAdmin, string inputName) {
     admin adminObj;
     
     transform(inputName.begin(), inputName.end(), inputName.begin(), ::toupper);
-    cout << inputName << endl;
 
     bool foundUser = false;
     while(!adminFile.eof() && !foundUser) {
