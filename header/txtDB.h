@@ -5,7 +5,7 @@
 #include <fstream>
 
 #define appTypeRNW "RNW"
-#define appTypeRJT "RJT"
+#define appTypeAPL "APL"
 
 #define appStatusPND "PND"
 #define appStatusAPV "APV"
