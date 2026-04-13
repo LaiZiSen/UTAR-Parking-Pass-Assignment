@@ -55,6 +55,7 @@ void writeUser(fstream &file, user input) {
     string writeLine = "\n";
     writeLine.append(strLengthEnforcer(input.name, input.name_Attr.size));
     writeLine.append(strLengthEnforcer(input.pwd, input.pwd_Attr.size));
+    writeLine.append(strLengthEnforcer(to_string(input.id), input.id_Attr.size));
     writeLine.append(strLengthEnforcer(input.faculty, input.faculty_Attr.size));
     writeLine.append(strLengthEnforcer(to_string(input.pass), input.pass_Attr.size));
     writeLine.append(strLengthEnforcer(input.car_plate, input.car_plate_Attr.size));
