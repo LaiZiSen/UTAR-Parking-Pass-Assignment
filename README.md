@@ -58,6 +58,7 @@ There are five text files maanged with different formats
 
 - Username 20 letters
 - User password 8 letters
+- User ID 7 letters
 - Faculty 6 letter
 - Parking Pass 6 letter
 - Car plate 10 letter

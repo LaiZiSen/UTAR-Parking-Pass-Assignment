@@ -4,6 +4,16 @@
 #include <string>
 #include <fstream>
 
+#define appTypeRNW "RNW"
+#define appTypeRJT "RJT"
+
+#define appStatusPND "PND"
+#define appStatusAPV "APV"
+#define appStatusRJT "RJT"
+
+#define transTypeINC "INC"
+#define transTypeRFD "RFD"
+
 enum RESULT {
     VALID_RECORD,
     INVALID_RECORD,
@@ -31,6 +41,7 @@ struct admin {
 struct user {
     static const attribute name_Attr;
     static const attribute pwd_Attr;
+    static const attribute id_Attr;
     static const attribute faculty_Attr;
     static const attribute pass_Attr;
     static const attribute car_plate_Attr;
@@ -39,6 +50,7 @@ struct user {
     int line;
     std::string name;
     std::string pwd;
+    int id;
     std::string faculty;
     int pass;
     std::string car_plate;
@@ -108,6 +120,9 @@ RESULT getAnalytic(std::fstream&, analytic&, int);
 
 bool edit (std::fstream &file, int line, int lineSize, attribute editAttribute, std::string editValue);
 bool removeRecord(std::fstream &file, int line, int lineSize);
+
+bool searchUser(user &outputUser, std::string inputName);
+bool searchAdmin(admin &outputAdmin, std::string inputName);
 
 std::string  strLengthEnforcer(std::string targetStr, int fillSize);
 std::string trim(const std::string& input);

@@ -2,7 +2,9 @@
 #include <fstream>
 #include <string>
 #include <ctime>
+#include <bits/stdc++.h>
 #include "../header/txtDB.h"
+#include "../header/txtPath.h"
 
 using namespace std;
 
@@ -12,7 +14,8 @@ const int admin::lineSize(admin::pwd_Attr.pos + admin::pwd_Attr.size + 2);
 
 const attribute user::name_Attr(0, 20);
 const attribute user::pwd_Attr(user::name_Attr.pos + user::name_Attr.size, 8);
-const attribute user::faculty_Attr(user::pwd_Attr.pos + user::pwd_Attr.size, 6);
+const attribute user::id_Attr(user::pwd_Attr.pos + user::pwd_Attr.size, 7);
+const attribute user::faculty_Attr(user::id_Attr.pos + user::id_Attr.size, 6);
 const attribute user::pass_Attr(user::faculty_Attr.pos + user::faculty_Attr.size, 6);
 const attribute user::car_plate_Attr(user::pass_Attr.pos + user::pass_Attr.size, 10);
 const int user::lineSize(user::car_plate_Attr.pos + user::car_plate_Attr.size + 2);
@@ -123,6 +126,7 @@ RESULT getUser(fstream &file, user &output, int lineNum) {
         }
         
         output.name = line.substr(output.name_Attr.pos, output.name_Attr.size);
+        output.id = stoi(line.substr(output.id_Attr.pos, output.id_Attr.size));
         output.pwd = line.substr(output.pwd_Attr.pos,output.pwd_Attr.size);
         output.faculty = line.substr(output.faculty_Attr.pos, output.faculty_Attr.size);
         output.pass = stoi(line.substr(output.pass_Attr.pos,output.pass_Attr.size));
@@ -225,6 +229,67 @@ bool removeRecord(fstream &file, int line, int lineSize) {
     file.write(fillString.c_str(), lineSize-2);
 
     return true;
+}
+
+bool searchUser(user &outputUser, string inputName) {
+    fstream userFile(USER_FILE);
+    int lineNum = 0;
+    user userObj;
+    
+    transform(inputName.begin(), inputName.end(), inputName.begin(), ::toupper);
+
+    bool foundUser = false;
+    while(!userFile.eof() && !foundUser) {
+        RESULT result = getUser(userFile, userObj, lineNum);
+        lineNum++;
+
+        if(result != VALID_RECORD) continue;
+
+        string username = userObj.name;
+        transform(username.begin(), username.end(), username.begin(), ::toupper);
+
+        if(username.compare(inputName) == 0) {
+            outputUser = userObj; 
+            userFile.close();
+            return true;
+        } else {
+            continue;
+        };
+    }
+    return false;
+
+    userFile.close();
+}
+
+bool searchAdmin(admin &outputAdmin, string inputName) {
+    fstream adminFile(ADMIN_FILE);
+    int lineNum = 0;
+    admin adminObj;
+    
+    transform(inputName.begin(), inputName.end(), inputName.begin(), ::toupper);
+    cout << inputName << endl;
+
+    bool foundUser = false;
+    while(!adminFile.eof() && !foundUser) {
+        RESULT result = getAdmin(adminFile, adminObj, lineNum);
+        lineNum++;
+
+        if(result != VALID_RECORD) continue;
+
+        string adminName = adminObj.name;
+        transform(adminName.begin(), adminName.end(), adminName.begin(), ::toupper);
+        
+        if(adminName.compare(inputName) == 0) {
+            outputAdmin = adminObj; 
+            adminFile.close();
+            return true;
+        } else {
+            continue;
+        };
+    }
+    return false;
+
+    adminFile.close();
 }
 
 string  strLengthEnforcer(string targetStr, int fillSize) {
