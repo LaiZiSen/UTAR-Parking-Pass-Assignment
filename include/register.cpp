@@ -55,15 +55,15 @@ bool searchStudentId(int studentId) {
 
 void getRegisterName(user &userObj) {
     user placeholderUser;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
     while(true) {
-        cout << "Enter a Username:  ";
-        // std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        cout << "Enter a Username (up to 20 letters):  ";
         userObj.name = getLineInput(userObj.name_Attr);
         transform(userObj.name.begin(), userObj.name.end(), userObj.name.begin(), ::toupper);
-    
-        if (searchUser(placeholderUser, userObj.name)) {
-            cout << "USERNAME ALREADY EXIST!" << endl;
+
+        if (searchUser(placeholderUser, userObj.name) || userObj.name[0] == ' ') {
+            cout << "USERNAME ALREADY EXIST OR INVALID!" << endl << endl;
         } else {
             return;
         }
@@ -71,11 +71,15 @@ void getRegisterName(user &userObj) {
 }
 
 void getRegisterPassword(user &userObj) {
-    do {
+    while (true) {
         cout << endl <<"Enter Password (8 letters long):  ";
         cin >> userObj.pwd;
         userObj.pwd = removeSpaces(userObj.pwd);
-    } while (userObj.pwd.length() < userObj.pwd_Attr.size);
+
+        if (userObj.pwd.length() < userObj.pwd_Attr.size) {
+            cout << "INVALID PASSWORD" << endl;
+        } else {break;}
+    }
 
 
     while(true) {
@@ -86,6 +90,8 @@ void getRegisterPassword(user &userObj) {
         
         if (confirmPwd.compare(userObj.pwd) == 0) {
             return;
+        } else {
+            cout << "INVALID PASSWORD" << endl;
         }
     }
 }
@@ -95,7 +101,7 @@ void getRegisterId(user &userObj) {
     int studentIdInt;
 
     while (true) {
-        cout << endl << "Enter Your Student ID (up to 20 letters):  ";
+        cout << endl << "Enter Your Student ID:  ";
         cin >>  studentIdStr;
 
         studentIdInt = atoi(studentIdStr.c_str());
@@ -216,7 +222,7 @@ bool confirmRegister(user registerUser) {
 }
 
 
-bool registerUser() {
+void registerUser() {
     /*
     
     Get username
@@ -257,10 +263,10 @@ bool registerUser() {
 
         cout << "REGISTERED USER - " << userObj.name << endl;
     } else {
-        cout << "FAILED TO REGISTER USER";
+        cout << "FAILED TO REGISTER USER, EXITING TO MAIN MENU" << endl;
     }
 }
 
-int main () {
-    registerUser();
-}
+// int main () {
+//     registerUser();
+// }
