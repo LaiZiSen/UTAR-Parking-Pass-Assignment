@@ -6,5 +6,6 @@
 
 char getChoice();
 std::string getLineInput(attribute attributeWanted);
+std::string removeSpaces(std::string str);
 
 #endif

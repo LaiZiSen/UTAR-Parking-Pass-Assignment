@@ -1,5 +1,6 @@
 #include <string>
 #include <iostream>
+#include <algorithm>
 #include "../header/txtDB.h"
 
 using namespace std;
@@ -21,4 +22,10 @@ string getLineInput(attribute attributeWanted) {
     outputStr = strLengthEnforcer(outputStr, attributeWanted.size);
 
     return outputStr;
+}
+
+string removeSpaces(string str) {
+    str.erase(std::remove(str.begin(), str.end(), ' '), str.end());
+
+    return str;
 }

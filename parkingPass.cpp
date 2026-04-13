@@ -1,9 +1,11 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <limits>
 #include "header/generalFunc.h"
 #include "header/txtDB.h"
 #include "header/login.h"
+#include "header/register.h"
 
 using namespace std;
 
@@ -47,7 +49,7 @@ int main () {
                 }
                 break;
             case '4':
-                // Register user account
+                registerUser();
                 break;
             case '5':
                 cout << endl << "Exiting Parking Pass program";
