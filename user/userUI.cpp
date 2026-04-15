@@ -85,7 +85,7 @@ void userUI(string username){
     while(running){
         char choice, mainMenu;
         
-        cout<<"--------Menu Choice--------"<<endl;
+        cout<<"--------user Menu Choice--------"<<endl;
         cout<<"1. Apply"<<endl;
         cout<<"2. Check Application Status"<<endl;
         cout<<"3. Check Transaction History"<<endl;
@@ -126,6 +126,13 @@ void userUI(string username){
 //test function
 int main(){
     string username = userLogin();
+
+    user userObj;
+
+    fstream userFile(USER_FILE);
+
+    getUser(userFile,userObj, 0);
+
     userUI(username);
     return 0;
 }

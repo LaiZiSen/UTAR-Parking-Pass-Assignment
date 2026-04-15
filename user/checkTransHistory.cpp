@@ -19,6 +19,8 @@ void checkTransHistory(string username){
 
     bool validRecord = false;
 
+    cout<<left<<setw(20)<<"DATE"<<"AMOUNT"<<endl;
+
     while(true){
         result = getTransaction(transFile, tempTrans, lineNum);
         
@@ -27,10 +29,11 @@ void checkTransHistory(string username){
             continue;
         }
         if(result==END_OF_FILE){
-            cout<<"Can't find application";
+            cout<<"End of record";
             break;
         }
         if(result==VALID_RECORD){
+            validRecord = true;
             if(trim(tempTrans.username)==username){
 
                 string trans_type;
@@ -39,14 +42,8 @@ void checkTransHistory(string username){
                 }else if(tempTrans.trans_type=="RFD"){
                     trans_type="- RM";
                 }
-
-                cout<<left<<setw(20)<<"DATE"<<"AMOUNT"<<endl;
                 cout<<left<<setw(20)<<trim(to_string(tempTrans.date))<<fixed<<setprecision(2)<<trans_type<<(tempTrans.amount)<<endl;
-
-                validRecord = true;
-                break;
             }
-
         }
         lineNum++;
     }

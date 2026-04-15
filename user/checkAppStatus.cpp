@@ -7,7 +7,7 @@
 #include "../header/txtPath.h"
 #include "../header/user.h"
 
-void checkAppStatus(string username){
+void checkAppStatus(user userObj){
     fstream appFile(APPLICATION_FILE, ios::in);
     if (!appFile.is_open()){
         cout << "file can't open...";
@@ -31,7 +31,7 @@ void checkAppStatus(string username){
             break;
         }
         if(result==VALID_RECORD){
-            if(trim(tempApp.username)==username){
+            if(trim(tempApp.username)==userObj.name){
 
                 string type, status;
                 if(tempApp.type=="RNW"){
