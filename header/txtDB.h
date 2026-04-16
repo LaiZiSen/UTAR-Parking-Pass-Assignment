@@ -4,6 +4,8 @@
 #include <string>
 #include <fstream>
 
+#define PARKING_PASS_PRICE 34.8
+
 #define appTypeRNW "RNW"
 #define appTypeAPL "APL"
 
@@ -93,7 +95,6 @@ struct analytic {
     static const attribute new_user_count_Attr;
     static const attribute new_application_count_Attr;
     static const attribute extension_count_Attr;
-    static const attribute pass_price_Attr;
     static const attribute income_Attr;
     static const int lineSize;
 
@@ -102,7 +103,6 @@ struct analytic {
     int new_user_count;
     int new_application_count;
     int extension_count;
-    float pass_price;
     float income;
 };
 

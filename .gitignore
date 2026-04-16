@@ -4,3 +4,4 @@ build/
 db/
 test.cpp
 .vscode/
+testDB/
