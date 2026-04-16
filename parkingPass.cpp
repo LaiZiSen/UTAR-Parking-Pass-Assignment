@@ -12,10 +12,10 @@ using namespace std;
 void printGeneralMenu() {
     cout << endl;
     cout << "General Menu" << endl;
-    cout << "1. Description" << endl;
-    cout << "2. Login as User" << endl;
-    cout << "3. Login as Admin" << endl;
-    cout << "4. Register" << endl; 
+    cout << "1. Login as User" << endl;
+    cout << "2. Login as Admin" << endl;
+    cout << "3. Register" << endl; 
+    cout << "4. Check Pass" << endl;
     cout << "5. Exit Program" << endl << endl;
 }
 
@@ -36,20 +36,20 @@ int main () {
         admin adminObj;
         switch (choice) {
             case '1':
-                printDescription();
-                break;
-            case '2':
                 if (loginUser(userObj)) {
                     cout << "ENTER USER UI AS " << userObj.name << endl;
                 } 
                 break;
-            case '3':
+            case '2':
                 if (loginAdmin(adminObj)) {
                     cout << "ENTER ADMIN UI AS " << adminObj.name << endl;
                 }
                 break;
-            case '4':
+            case '3':
                 registerUser();
+                break;
+            case '4':
+                // check parking Pass
                 break;
             case '5':
                 cout << endl << "Exiting Parking Pass program";
