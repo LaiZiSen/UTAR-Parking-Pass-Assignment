@@ -19,10 +19,6 @@ void printGeneralMenu() {
     cout << "5. Exit Program" << endl << endl;
 }
 
-void printDescription() {
-    cout << endl << "Description" << endl;
-}
-
 int main () {
     
     bool progRunning = true;
