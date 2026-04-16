@@ -4,8 +4,10 @@
 #include <string>
 #include <fstream>
 
+#define PARKING_PASS_PRICE 34.8
+
 #define appTypeRNW "RNW"
-#define appTypeRJT "RJT"
+#define appTypeAPL "APL"
 
 #define appStatusPND "PND"
 #define appStatusAPV "APV"
@@ -93,7 +95,6 @@ struct analytic {
     static const attribute new_user_count_Attr;
     static const attribute new_application_count_Attr;
     static const attribute extension_count_Attr;
-    static const attribute pass_price_Attr;
     static const attribute income_Attr;
     static const int lineSize;
 
@@ -102,7 +103,6 @@ struct analytic {
     int new_user_count;
     int new_application_count;
     int extension_count;
-    float pass_price;
     float income;
 };
 
@@ -120,6 +120,9 @@ RESULT getAnalytic(std::fstream&, analytic&, int);
 
 bool edit (std::fstream &file, int line, int lineSize, attribute editAttribute, std::string editValue);
 bool removeRecord(std::fstream &file, int line, int lineSize);
+
+bool searchUser(user &outputUser, std::string inputName);
+bool searchAdmin(admin &outputAdmin, std::string inputName);
 
 std::string  strLengthEnforcer(std::string targetStr, int fillSize);
 std::string trim(const std::string& input);

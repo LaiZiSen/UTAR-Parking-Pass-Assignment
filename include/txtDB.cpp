@@ -2,7 +2,9 @@
 #include <fstream>
 #include <string>
 #include <ctime>
+#include <bits/stdc++.h>
 #include "../header/txtDB.h"
+#include "../header/txtPath.h"
 
 using namespace std;
 
@@ -36,8 +38,7 @@ const attribute analytic::month_Attr(0, 6);
 const attribute analytic::new_user_count_Attr(analytic::month_Attr.pos + analytic::month_Attr.size, 3);
 const attribute analytic::new_application_count_Attr(analytic::new_user_count_Attr.pos + analytic::new_user_count_Attr.size, 3);
 const attribute analytic::extension_count_Attr(analytic::new_application_count_Attr.pos + analytic::new_application_count_Attr.size, 3);
-const attribute analytic::pass_price_Attr(analytic::extension_count_Attr.pos + analytic::extension_count_Attr.size, 5);
-const attribute analytic::income_Attr(analytic::pass_price_Attr.pos + analytic::pass_price_Attr.size, 8);
+const attribute analytic::income_Attr(analytic::extension_count_Attr.pos + analytic::extension_count_Attr.size, 8);
 const int analytic::lineSize(analytic::income_Attr.pos + analytic::income_Attr.size + 2);
 
 void writeAdmin(fstream &file, admin input) {
@@ -91,7 +92,6 @@ void writeAnalytic(fstream &file, analytic input) {
     writeLine.append(strLengthEnforcer(to_string(input.new_user_count), input.new_user_count_Attr.size));
     writeLine.append(strLengthEnforcer(to_string(input.new_application_count), input.new_application_count_Attr.size));
     writeLine.append(strLengthEnforcer(to_string(input.extension_count), input.extension_count_Attr.size));
-    writeLine.append(strLengthEnforcer(to_string(input.pass_price), input.pass_price_Attr.size));
     writeLine.append(strLengthEnforcer(to_string(input.income), input.income_Attr.size));
 
     file.seekp(0, fstream::end);
@@ -124,6 +124,7 @@ RESULT getUser(fstream &file, user &output, int lineNum) {
         }
         
         output.name = line.substr(output.name_Attr.pos, output.name_Attr.size);
+        output.id = stoi(line.substr(output.id_Attr.pos, output.id_Attr.size));
         output.pwd = line.substr(output.pwd_Attr.pos,output.pwd_Attr.size);
         output.faculty = line.substr(output.faculty_Attr.pos, output.faculty_Attr.size);
         output.pass = stoi(line.substr(output.pass_Attr.pos,output.pass_Attr.size));
@@ -187,7 +188,6 @@ RESULT getAnalytic(fstream &file, analytic &output, int lineNum) {
         output.new_user_count = stoi(line.substr(output.new_user_count_Attr.pos, output.new_user_count_Attr.size));
         output.new_application_count = stoi(line.substr(output.new_application_count_Attr.pos, output.new_application_count_Attr.size));
         output.extension_count = stoi(line.substr(output.extension_count_Attr.pos, output.extension_count_Attr.size));
-        output.pass_price = stof(line.substr(output.pass_price_Attr.pos, output.pass_price_Attr.size));
         output.income = stof(line.substr(output.income_Attr.pos, output.income_Attr.size));
         output.line = lineNum;
 
@@ -226,6 +226,67 @@ bool removeRecord(fstream &file, int line, int lineSize) {
     file.write(fillString.c_str(), lineSize-2);
 
     return true;
+}
+
+bool searchUser(user &outputUser, string inputName) {
+    fstream userFile(USER_FILE);
+    int lineNum = 0;
+    user userObj;
+    
+    transform(inputName.begin(), inputName.end(), inputName.begin(), ::toupper);
+
+    bool foundUser = false;
+    while(!userFile.eof() && !foundUser) {
+        RESULT result = getUser(userFile, userObj, lineNum);
+        lineNum++;
+
+        if(result != VALID_RECORD) continue;
+
+        string username = userObj.name;
+        transform(username.begin(), username.end(), username.begin(), ::toupper);
+
+        if(username.compare(inputName) == 0) {
+            outputUser = userObj; 
+            userFile.close();
+            return true;
+        } else {
+            continue;
+        };
+    }
+    return false;
+
+    userFile.close();
+}
+
+bool searchAdmin(admin &outputAdmin, string inputName) {
+    fstream adminFile(ADMIN_FILE);
+    int lineNum = 0;
+    admin adminObj;
+    
+    transform(inputName.begin(), inputName.end(), inputName.begin(), ::toupper);
+    cout << inputName << endl;
+
+    bool foundUser = false;
+    while(!adminFile.eof() && !foundUser) {
+        RESULT result = getAdmin(adminFile, adminObj, lineNum);
+        lineNum++;
+
+        if(result != VALID_RECORD) continue;
+
+        string adminName = adminObj.name;
+        transform(adminName.begin(), adminName.end(), adminName.begin(), ::toupper);
+        
+        if(adminName.compare(inputName) == 0) {
+            outputAdmin = adminObj; 
+            adminFile.close();
+            return true;
+        } else {
+            continue;
+        };
+    }
+    return false;
+
+    adminFile.close();
 }
 
 string  strLengthEnforcer(string targetStr, int fillSize) {

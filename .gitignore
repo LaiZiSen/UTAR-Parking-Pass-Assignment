@@ -5,3 +5,4 @@ db/
 testDB/
 test.cpp
 .vscode/
+testDB/
