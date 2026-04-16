@@ -38,8 +38,7 @@ const attribute analytic::month_Attr(0, 6);
 const attribute analytic::new_user_count_Attr(analytic::month_Attr.pos + analytic::month_Attr.size, 3);
 const attribute analytic::new_application_count_Attr(analytic::new_user_count_Attr.pos + analytic::new_user_count_Attr.size, 3);
 const attribute analytic::extension_count_Attr(analytic::new_application_count_Attr.pos + analytic::new_application_count_Attr.size, 3);
-const attribute analytic::pass_price_Attr(analytic::extension_count_Attr.pos + analytic::extension_count_Attr.size, 5);
-const attribute analytic::income_Attr(analytic::pass_price_Attr.pos + analytic::pass_price_Attr.size, 8);
+const attribute analytic::income_Attr(analytic::extension_count_Attr.pos + analytic::extension_count_Attr.size, 8);
 const int analytic::lineSize(analytic::income_Attr.pos + analytic::income_Attr.size + 2);
 
 void writeAdmin(fstream &file, admin input) {
@@ -94,7 +93,6 @@ void writeAnalytic(fstream &file, analytic input) {
     writeLine.append(strLengthEnforcer(to_string(input.new_user_count), input.new_user_count_Attr.size));
     writeLine.append(strLengthEnforcer(to_string(input.new_application_count), input.new_application_count_Attr.size));
     writeLine.append(strLengthEnforcer(to_string(input.extension_count), input.extension_count_Attr.size));
-    writeLine.append(strLengthEnforcer(to_string(input.pass_price), input.pass_price_Attr.size));
     writeLine.append(strLengthEnforcer(to_string(input.income), input.income_Attr.size));
 
     file.seekp(0, fstream::end);
@@ -191,7 +189,6 @@ RESULT getAnalytic(fstream &file, analytic &output, int lineNum) {
         output.new_user_count = stoi(line.substr(output.new_user_count_Attr.pos, output.new_user_count_Attr.size));
         output.new_application_count = stoi(line.substr(output.new_application_count_Attr.pos, output.new_application_count_Attr.size));
         output.extension_count = stoi(line.substr(output.extension_count_Attr.pos, output.extension_count_Attr.size));
-        output.pass_price = stof(line.substr(output.pass_price_Attr.pos, output.pass_price_Attr.size));
         output.income = stof(line.substr(output.income_Attr.pos, output.income_Attr.size));
         output.line = lineNum;
 
