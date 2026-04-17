@@ -3,6 +3,7 @@
 #include "../header/txtDB.h"
 #include "../header/txtPath.h"
 #include "../header/approveAPP.h"
+#include "../header/checkAnalytics.h"
 
 using namespace std;
 
@@ -40,10 +41,10 @@ void adminUI(admin adminData) {
                 approveAPP();
                 break;
             case '2':
-                cout << endl << "Check Analytics" << endl;
+                cout << endl << "Apply Applications" << endl;
                 break;
             case '3':
-                cout << endl << "Apply Applications" << endl;
+                checkAnalytics();
                 break;
             case '4':
                 cout << endl << "Logging out " << adminData.name << endl;

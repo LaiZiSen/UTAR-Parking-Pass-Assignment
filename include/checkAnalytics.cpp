@@ -44,6 +44,7 @@ void getAnalyticList(analyticList &list) {
             list.headNode = newNode;
             list.tailNode = newNode;
             list.curNode = newNode;
+            newNode->prevNode = nullptr;
         } else {
             newNode->prevNode = list.tailNode;
             list.tailNode->nextNode = newNode;
@@ -116,7 +117,7 @@ void checkAnalytics() {
                     analyticListObj.curNode = analyticListObj.curNode->prevNode;
                     choiceDone = true;
                 } else {
-                    cout << "There is no record for the previous month" << endl;
+                    cout << endl << "There is no record for the previous month" << endl << endl;
                 }
                 break;
             
@@ -130,7 +131,7 @@ void checkAnalytics() {
                 break;
     
             case '3':
-                cout << endl << "Quiting Check Analysis" << endl << endl;
+                cout << endl << "Quiting Check Analysis" << endl;
                 choiceDone = true;
                 done = true;
                 break;
@@ -146,6 +147,6 @@ void checkAnalytics() {
     }
 }
 
-int main () {
-    checkAnalytics();
-}
+// int main () {
+//     checkAnalytics();
+// }
