@@ -6,8 +6,8 @@ using namespace std;
 
 // Function declarations (prototypes only)
 string userLogin();
-void userUI(string username);
-void checkAppStatus(string username);
+void userUI(user userData);
+void checkAppStatus(user userObj);
 void checkTransHistory(string username);
 void userProfile(string username);  //creative feature
 

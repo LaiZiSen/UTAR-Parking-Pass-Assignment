@@ -34,7 +34,7 @@ void checkTransHistory(string username){
         }
         if(result==VALID_RECORD){
             validRecord = true;
-            if(trim(tempTrans.username)==username){
+            if(trim(tempTrans.username)==trim(username)){
 
                 string trans_type;
                 if(tempTrans.trans_type=="INC"){

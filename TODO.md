@@ -1,4 +1,7 @@
-- test everything in txtDB
-- ~~Add analytics~~
-- Start the actual project
-- Figure out how to export everything
+- check Application change Date and Pass into appropriate date format
+
+- UserApply function
+
+- implementation of userapply
+
+- implementation of userui

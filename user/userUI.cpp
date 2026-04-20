@@ -79,13 +79,13 @@ string userLogin(){
     return username;
 }
 
-void userUI(string username){
+void userUI(user userData){
     bool running = true;
 
     while(running){
         char choice, mainMenu;
         
-        cout<<"--------user Menu Choice--------"<<endl;
+        cout<<"--------User Menu Choice--------"<<endl;
         cout<<"1. Apply"<<endl;
         cout<<"2. Check Application Status"<<endl;
         cout<<"3. Check Transaction History"<<endl;
@@ -102,17 +102,17 @@ void userUI(string username){
                 break;
             case '2': 
                 cout<<"\nAPPLICATION STATUS:"<<endl;
-                checkAppStatus(username);
+                checkAppStatus(userData);
                 cout<<"\n.....Returning to main menu...\n"<<endl;
                 break;
             case '3':
                 cout<<"\nTRANSACTION HISTORY:"<<endl;
-                checkTransHistory(username);
+                checkTransHistory(userData.name);
                 cout<<"\n.....Returning to main menu...\n"<<endl;
                 break;
             case '4':
                 cout<<"\nPROFILE:"<<endl;
-                userProfile(username);
+                userProfile(userData.name);
                 cout<<"\n.....Returning to main menu...\n"<<endl;
                 break;
             case '5':
@@ -125,7 +125,7 @@ void userUI(string username){
 
 //test function
 int main(){
-    string username = userLogin();
+    // string username = userLogin();
 
     user userObj;
 
@@ -133,6 +133,6 @@ int main(){
 
     getUser(userFile,userObj, 0);
 
-    userUI(username);
+    userUI(userObj);
     return 0;
 }

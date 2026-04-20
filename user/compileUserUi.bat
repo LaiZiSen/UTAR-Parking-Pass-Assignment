@@ -1,0 +1,1 @@
+g++ userUI.cpp .\checkTransHistory.cpp .\checkAppStatus.cpp .\userProfile.cpp  ..\include\txtDB.cpp -o user.exe

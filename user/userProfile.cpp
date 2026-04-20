@@ -31,10 +31,12 @@ void userProfile(string username){
             break;
         }
         if(result==VALID_RECORD){
-            if(trim(tempUser.name)==username){
+            if(trim(tempUser.name)==trim(username)){
 
                 cout<<left<<setw(20)<<"Name"<<": "<<trim(tempUser.name)<<endl;
+                cout<<left<<setw(20)<<"Student ID"<<": "<<trim(to_string(tempUser.id))<<endl;
                 cout<<left<<setw(20)<<"Faculty"<<": "<<trim(tempUser.faculty)<<endl;
+                cout<<left<<setw(20)<<"Pass active until"<<": "<<trim(to_string(tempUser.pass))<<endl;
                 cout<<left<<setw(20)<<"Car plate"<<": "<<trim(tempUser.car_plate)<<endl;
 
                 validRecord = true;
