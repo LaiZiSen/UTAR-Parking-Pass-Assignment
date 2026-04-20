@@ -80,6 +80,7 @@ void checkPass() {
 
     while (true)
     {
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         cout << "ENTER CARPLATE:  ";
         string carPlate = getLineInput(userSample.car_plate_Attr);
         carPlate = trim(carPlate);
@@ -114,7 +115,6 @@ void checkPass() {
             switch (choice) {
                 case '1':
                     loopDone = true;
-                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                     break;
                 case '2':
                     cout << endl << "Quiting Check Pass" << endl;
@@ -124,7 +124,7 @@ void checkPass() {
     }
 }
 
-int main () {
-    checkPass();
-    return 0;
-}
+// int main () {
+//     checkPass();
+//     return 0;
+// }

@@ -6,6 +6,7 @@
 #include "header/txtDB.h"
 #include "header/login.h"
 #include "header/register.h"
+#include "header/checkPass.h"
 
 using namespace std;
 
@@ -45,7 +46,7 @@ int main () {
                 registerUser();
                 break;
             case '4':
-                // check parking Pass
+                checkPass();
                 break;
             case '5':
                 cout << endl << "Exiting Parking Pass program";
