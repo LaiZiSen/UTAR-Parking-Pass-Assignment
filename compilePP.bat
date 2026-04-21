@@ -1,0 +1,1 @@
+g++ parkingPass.cpp ./include/login.cpp ./include/generalFunc.cpp ./include/txtDB.cpp ./include/register.cpp  ./include/checkPass.cpp  ./include/applyPass.cpp ./include/checkAppStatus.cpp ./include/checkTransHistory.cpp ./include/userProfile.cpp ./include/userUI.cpp  -o parkingPass.exe

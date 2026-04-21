@@ -10,7 +10,7 @@
 void checkTransHistory(string username){
     fstream transFile(TRANSACTION_FILE, ios::in);
     if (!transFile.is_open()){
-        cout << "file can't open...";
+        cout << "file can't open..." << endl;
         exit;
     }
     RESULT result;
@@ -25,11 +25,10 @@ void checkTransHistory(string username){
         result = getTransaction(transFile, tempTrans, lineNum);
         
         if(result==INVALID_RECORD){
-            cout<<"Invalid record";
             continue;
         }
         if(result==END_OF_FILE){
-            cout<<"End of record";
+            cout<<"End of record" << endl;
             break;
         }
         if(result==VALID_RECORD){
@@ -49,7 +48,7 @@ void checkTransHistory(string username){
     }
     transFile.close();
     if(!validRecord){
-        cout<<"Record not found.";
+        cout<<"Record not found." << endl;
     }
     
     cout << endl <<  "Enter to return to User Menu";

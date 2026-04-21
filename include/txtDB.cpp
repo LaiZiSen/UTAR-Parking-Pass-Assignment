@@ -54,6 +54,7 @@ void writeUser(fstream &file, user input) {
     string writeLine = "\n";
     writeLine.append(strLengthEnforcer(input.name, input.name_Attr.size));
     writeLine.append(strLengthEnforcer(input.pwd, input.pwd_Attr.size));
+    writeLine.append(strLengthEnforcer(to_string(input.id), input.id_Attr.size));
     writeLine.append(strLengthEnforcer(input.faculty, input.faculty_Attr.size));
     writeLine.append(strLengthEnforcer(to_string(input.pass), input.pass_Attr.size));
     writeLine.append(strLengthEnforcer(input.car_plate, input.car_plate_Attr.size));
@@ -228,6 +229,28 @@ bool removeRecord(fstream &file, int line, int lineSize) {
     return true;
 }
 
+bool searchCarPlate(string carPlate) {
+    fstream userFile(USER_FILE);
+    user userObj;
+
+    bool foundCarPlate = false;
+    while(!userFile.eof() && !foundCarPlate) {
+        RESULT result = getUser(userFile, userObj, 0);\
+
+        if(result != VALID_RECORD) continue;
+        
+        if(userObj.car_plate.compare(carPlate) == 0) {
+            userFile.close();
+            return true;
+        } else {
+            continue;
+        };
+    }
+    return false;
+
+    userFile.close();
+}
+
 bool searchUser(user &outputUser, string inputName) {
     fstream userFile(USER_FILE);
     int lineNum = 0;
@@ -264,7 +287,6 @@ bool searchAdmin(admin &outputAdmin, string inputName) {
     admin adminObj;
     
     transform(inputName.begin(), inputName.end(), inputName.begin(), ::toupper);
-    cout << inputName << endl;
 
     bool foundUser = false;
     while(!adminFile.eof() && !foundUser) {

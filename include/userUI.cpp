@@ -47,22 +47,22 @@ void userUI(user userData){
                 cout<<"\n.....Returning to main menu...\n"<<endl;
                 break;
             case '5':
-                cout<<"...Logging out...";
+                cout<< endl << "...Logging out...";
                 running = false;
                 break;
         }
     }
 }
 
-//test function
-int main(){
+// //test function
+// int main(){
     
-    user userObj;
+//     user userObj;
 
-    fstream userFile(USER_FILE);
+//     fstream userFile(USER_FILE);
 
-    getUser(userFile,userObj, 0);
+//     getUser(userFile,userObj, 0);
 
-    userUI(userObj);
-    return 0;
-}
+//     userUI(userObj);
+//     return 0;
+// }
