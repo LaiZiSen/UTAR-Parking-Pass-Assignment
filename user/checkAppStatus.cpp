@@ -24,7 +24,6 @@ void checkAppStatus(user userObj){
         result = getApplication(appFile, tempApp, lineNum);
         
         if(result==INVALID_RECORD){
-            cout<<"Invalid record";
             continue;
         }
         if(result==END_OF_FILE){
@@ -51,7 +50,6 @@ void checkAppStatus(user userObj){
 
                 tm curPassTM;
                 char curPassStr[50];
-
                 curPassTM.tm_year = userObj.pass/100 - 1900;
                 curPassTM.tm_mon = userObj.pass % 100 -1;
                 strftime(curPassStr, 50, "%b %Y", &curPassTM);
