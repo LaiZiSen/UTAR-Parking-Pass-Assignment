@@ -10,5 +10,6 @@ void userUI(user userData);
 void checkAppStatus(user userObj);
 void checkTransHistory(string username);
 void userProfile(string username);  //creative feature
+void applyPass(user userData);
 
 #endif
