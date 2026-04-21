@@ -1,1 +1,1 @@
-g++ userUI.cpp .\checkTransHistory.cpp .\checkAppStatus.cpp .\userProfile.cpp  ..\include\txtDB.cpp -o user.exe
+g++ userUI.cpp .\checkTransHistory.cpp .\checkAppStatus.cpp .\userProfile.cpp  ..\include\txtDB.cpp ..\include\generalFunc.cpp applyPass.cpp -o user.exe

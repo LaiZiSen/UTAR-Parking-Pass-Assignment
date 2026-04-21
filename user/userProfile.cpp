@@ -50,4 +50,8 @@ void userProfile(string username){
     if(!validRecord){
         cout<<"Record not found.";
     }
+    
+    cout << endl <<  "Enter to return to User Menu";
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    cin.get();
 }

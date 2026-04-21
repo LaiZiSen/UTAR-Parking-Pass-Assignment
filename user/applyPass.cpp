@@ -150,6 +150,14 @@ bool searchApplication(fstream &applicationFile, string username) {
     applicationFile.clear();
 }
 
+void endProgram() {
+    cout << endl <<  "Enter to return to User Menu";
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    cin.get();
+
+    return;
+}
+
 void applyPass(user userData) {
     application applicationDetail;
     transaction applicationTransaction;
@@ -207,11 +215,23 @@ void applyPass(user userData) {
 
     if(searchApplication(applicationFile, userData.name)) {
         cout << endl << "YOU HAVE ALREADY SUBMITTED AN APPLICATION, GO TO CHECK APPLICATION" << endl;
+        
+        cout << endl <<  "Enter to return to User Menu";
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        cin.get();
+
         return;
     }
 
     if (!decideCarPlate(applicationDetail, userData, curYYYYMM)) {
         cout << endl << "YOUR CAR PLATE ALREADY HAS THE MAXIMUM PASS LENGTH, APPLICATION VOIDED" << endl;
+        
+        cout << endl <<  "Enter to return to User Menu";
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        cin.get();
+
+        return;
+
     }
 
     int appliedMonths = 0;
@@ -253,17 +273,18 @@ void applyPass(user userData) {
     } else {
         cout << endl <<  "TRANSACTION FAILED, APPLICATION VOIDED" << endl;
     }
+    
+    cout << endl <<  "Enter to return to User Menu";
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    cin.get();
 }
 
+// int main () {
 
+//     fstream userFile(USER_FILE);
+//     user userobj;
 
+//     getUser(userFile, userobj, 0);
 
-int main () {
-
-    fstream userFile(USER_FILE);
-    user userobj;
-
-    getUser(userFile, userobj, 0);
-
-    applyPass(userobj);
-}
+//     applyPass(userobj);
+// }
