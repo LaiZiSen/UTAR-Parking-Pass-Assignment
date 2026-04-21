@@ -121,6 +121,7 @@ RESULT getAnalytic(std::fstream&, analytic&, int);
 bool edit (std::fstream &file, int line, int lineSize, attribute editAttribute, std::string editValue);
 bool removeRecord(std::fstream &file, int line, int lineSize);
 
+bool searchCarPlate(std::string carPlate);
 bool searchUser(user &outputUser, std::string inputName);
 bool searchAdmin(admin &outputAdmin, std::string inputName);
 
