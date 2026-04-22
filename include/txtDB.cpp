@@ -81,7 +81,8 @@ void writeTransaction(fstream &file, transaction input) {
     writeLine.append(strLengthEnforcer(input.username, input.username_Attr.size));
     writeLine.append(strLengthEnforcer(input.trans_type, input.trans_type_Attr.size));
     writeLine.append(strLengthEnforcer(to_string(input.date), input.date_Attr.size));
-    writeLine.append(strLengthEnforcer(to_string(input.amount), input.amount_Attr.size));
+
+    writeLine.append(strLengthEnforcer(floatToStr(input.amount), input.amount_Attr.size));
 
     file.seekp(0, fstream::end);
     file.write(writeLine.c_str(), input.lineSize-1);
@@ -93,7 +94,8 @@ void writeAnalytic(fstream &file, analytic input) {
     writeLine.append(strLengthEnforcer(to_string(input.new_user_count), input.new_user_count_Attr.size));
     writeLine.append(strLengthEnforcer(to_string(input.new_application_count), input.new_application_count_Attr.size));
     writeLine.append(strLengthEnforcer(to_string(input.extension_count), input.extension_count_Attr.size));
-    writeLine.append(strLengthEnforcer(to_string(input.income), input.income_Attr.size));
+
+    writeLine.append(strLengthEnforcer(floatToStr(input.income), input.income_Attr.size));
 
     file.seekp(0, fstream::end);
     file.write(writeLine.c_str(), input.lineSize-1);
@@ -281,6 +283,28 @@ bool searchUser(user &outputUser, string inputName) {
     userFile.close();
 }
 
+bool searchCarPlate(string carPlate) {
+    fstream userFile(USER_FILE);
+    user userObj;
+
+    bool foundCarPlate = false;
+    while(!userFile.eof() && !foundCarPlate) {
+        RESULT result = getUser(userFile, userObj, 0);\
+
+        if(result != VALID_RECORD) continue;
+        
+        if(userObj.car_plate.compare(carPlate) == 0) {
+            userFile.close();
+            return true;
+        } else {
+            continue;
+        };
+    }
+    return false;
+
+    userFile.close();
+}
+
 bool searchAdmin(admin &outputAdmin, string inputName) {
     fstream adminFile(ADMIN_FILE);
     int lineNum = 0;
@@ -373,4 +397,12 @@ int getCurrDay(){
     timeinfo = localtime(&rawtime);
 
     return timeinfo -> tm_mday;
+}
+
+string floatToStr(float number) {
+    char str[50];
+    std::snprintf(str, sizeof(str), "%.1f", number);
+    std::string s(str);
+
+    return s;
 }

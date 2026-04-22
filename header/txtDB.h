@@ -132,4 +132,6 @@ int getCurrYearMonth();
 int getCurrYYMMDD();
 int getCurrDay();
 
+std::string floatToStr(float number); 
+
 #endif
