@@ -137,6 +137,68 @@ void endProgram() {
     return;
 }
 
+bool searchAnalytics(analytic &outputAnalytic, int yearMonth, int &nextLine) {
+    fstream analyticFile(ANALYTICS_FILE);
+    int lineNum = 0;
+    analytic analyticObj;
+    
+
+    bool foundUser = false;
+    while(!analyticFile.eof() && !foundUser) {
+        RESULT result = getAnalytic(analyticFile, analyticObj, lineNum);
+        lineNum++;
+
+        if(result != VALID_RECORD) continue;
+        
+        if(analyticObj.month == yearMonth) {
+            outputAnalytic = analyticObj; 
+            analyticFile.close();
+            return true;
+        } else {
+            continue;
+        };
+    }
+    nextLine = lineNum;
+    return false;
+
+    analyticFile.close();
+}
+
+void APPLUpdateAnalytics (int monthsApplied, string applicationType, float amount) {
+    analytic curMonAnalytics;
+    int nextLine = 0;
+
+    if (!searchAnalytics(curMonAnalytics, 202604, nextLine)) {
+        curMonAnalytics.month = 202604;
+        curMonAnalytics.extension_count = 0;
+        curMonAnalytics.income = 0;
+        curMonAnalytics.new_application_count = 0;
+        curMonAnalytics.new_user_count = 0;
+        curMonAnalytics.line = nextLine;
+        
+        fstream analyticFile(ANALYTICS_FILE);
+        writeAnalytic(analyticFile, curMonAnalytics);
+
+        analyticFile.close();
+    }
+
+    string extension_count_STR = to_string(curMonAnalytics.extension_count + 1);
+    string income_STR = floatToStr(curMonAnalytics.income + amount);
+
+    string new_application_STR = to_string(curMonAnalytics.new_application_count + (applicationType.compare(appTypeAPL) == 0));
+
+
+    cout << extension_count_STR + income_STR + new_application_STR << endl;
+
+    fstream analyticFile(ANALYTICS_FILE);
+
+    edit(analyticFile, curMonAnalytics.line, curMonAnalytics.lineSize, curMonAnalytics.extension_count_Attr, extension_count_STR);
+    edit(analyticFile, curMonAnalytics.line, curMonAnalytics.lineSize, curMonAnalytics.income_Attr, income_STR);
+    edit(analyticFile, curMonAnalytics.line, curMonAnalytics.lineSize, curMonAnalytics.new_application_count_Attr, new_application_STR);
+
+    analyticFile.close();
+}
+
 void applyPass(user userData) {
     application applicationDetail;
     transaction applicationTransaction;
@@ -201,6 +263,7 @@ void applyPass(user userData) {
 
         return;
     }
+    applicationFile.clear();
 
     if (!decideCarPlate(applicationDetail, userData, curYYYYMM)) {
         cout << endl << "YOUR CAR PLATE ALREADY HAS THE MAXIMUM PASS LENGTH, APPLICATION VOIDED" << endl;
@@ -247,6 +310,8 @@ void applyPass(user userData) {
     if (confirmPayment(applicationTransaction)) {
         writeTransaction(transactionFile, applicationTransaction);
         writeApplication(applicationFile, applicationDetail);
+
+        APPLUpdateAnalytics(appliedMonths, applicationDetail.type, applicationTransaction.amount);
 
         cout << endl << "TRANSACTION SUCCEED, APPLICATION SUBMITTED" << endl;
     } else {

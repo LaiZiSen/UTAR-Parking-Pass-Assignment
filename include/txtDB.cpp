@@ -283,28 +283,6 @@ bool searchUser(user &outputUser, string inputName) {
     userFile.close();
 }
 
-bool searchCarPlate(string carPlate) {
-    fstream userFile(USER_FILE);
-    user userObj;
-
-    bool foundCarPlate = false;
-    while(!userFile.eof() && !foundCarPlate) {
-        RESULT result = getUser(userFile, userObj, 0);\
-
-        if(result != VALID_RECORD) continue;
-        
-        if(userObj.car_plate.compare(carPlate) == 0) {
-            userFile.close();
-            return true;
-        } else {
-            continue;
-        };
-    }
-    return false;
-
-    userFile.close();
-}
-
 bool searchAdmin(admin &outputAdmin, string inputName) {
     fstream adminFile(ADMIN_FILE);
     int lineNum = 0;

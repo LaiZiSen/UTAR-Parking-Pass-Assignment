@@ -27,7 +27,7 @@ void checkAppStatus(user userObj){
             continue;
         }
         if(result==END_OF_FILE){
-            cout<<"Can't find application";
+            cout<<endl <<"Can't find application" << endl;
             break;
         }
         if(result==VALID_RECORD){
@@ -36,8 +36,8 @@ void checkAppStatus(user userObj){
                 string type, status;
                 if(tempApp.type=="RNW"){
                     type="Renew";
-                }else if(tempApp.type=="BUY"){
-                    type="Buy";
+                }else if(tempApp.type=="APL"){
+                    type="Application";
                 }
 
                 if(tempApp.status=="PND"){
