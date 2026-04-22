@@ -9,28 +9,6 @@
 
 using namespace std;
 
-bool searchCarPlate(string carPlate) {
-    fstream userFile(USER_FILE);
-    user userObj;
-
-    bool foundCarPlate = false;
-    while(!userFile.eof() && !foundCarPlate) {
-        RESULT result = getUser(userFile, userObj, 0);\
-
-        if(result != VALID_RECORD) continue;
-        
-        if(userObj.car_plate.compare(carPlate) == 0) {
-            userFile.close();
-            return true;
-        } else {
-            continue;
-        };
-    }
-    return false;
-
-    userFile.close();
-}
-
 bool searchStudentId(int studentId) {
     fstream userFile(USER_FILE);
     user userObj;
