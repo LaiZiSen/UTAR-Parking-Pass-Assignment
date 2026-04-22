@@ -128,4 +128,6 @@ bool searchAdmin(admin &outputAdmin, std::string inputName);
 std::string  strLengthEnforcer(std::string targetStr, int fillSize);
 std::string trim(const std::string& input);
 
+std::string floatToStr(float number); 
+
 #endif
