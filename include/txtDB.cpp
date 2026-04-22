@@ -313,6 +313,34 @@ bool searchAdmin(admin &outputAdmin, string inputName) {
     adminFile.close();
 }
 
+
+bool searchAnalytics(analytic &outputAnalytic, int yearMonth, int &nextLine) {
+    fstream analyticFile(ANALYTICS_FILE);
+    int lineNum = 0;
+    analytic analyticObj;
+    
+
+    bool foundUser = false;
+    while(!analyticFile.eof() && !foundUser) {
+        RESULT result = getAnalytic(analyticFile, analyticObj, lineNum);
+        lineNum++;
+
+        if(result != VALID_RECORD) continue;
+        
+        if(analyticObj.month == yearMonth) {
+            outputAnalytic = analyticObj; 
+            analyticFile.close();
+            return true;
+        } else {
+            continue;
+        };
+    }
+    nextLine = lineNum;
+    return false;
+
+    analyticFile.close();
+}
+
 string  strLengthEnforcer(string targetStr, int fillSize) {
     if (fillSize <= 0) {return "";}
 

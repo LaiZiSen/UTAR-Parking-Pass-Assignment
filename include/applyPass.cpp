@@ -137,33 +137,6 @@ void endProgram() {
     return;
 }
 
-bool searchAnalytics(analytic &outputAnalytic, int yearMonth, int &nextLine) {
-    fstream analyticFile(ANALYTICS_FILE);
-    int lineNum = 0;
-    analytic analyticObj;
-    
-
-    bool foundUser = false;
-    while(!analyticFile.eof() && !foundUser) {
-        RESULT result = getAnalytic(analyticFile, analyticObj, lineNum);
-        lineNum++;
-
-        if(result != VALID_RECORD) continue;
-        
-        if(analyticObj.month == yearMonth) {
-            outputAnalytic = analyticObj; 
-            analyticFile.close();
-            return true;
-        } else {
-            continue;
-        };
-    }
-    nextLine = lineNum;
-    return false;
-
-    analyticFile.close();
-}
-
 void APPLUpdateAnalytics (int monthsApplied, string applicationType, float amount) {
     analytic curMonAnalytics;
     int nextLine = 0;
@@ -182,7 +155,7 @@ void APPLUpdateAnalytics (int monthsApplied, string applicationType, float amoun
         analyticFile.close();
     }
 
-    string extension_count_STR = to_string(curMonAnalytics.extension_count + 1);
+    string extension_count_STR = to_string(curMonAnalytics.extension_count + monthsApplied);
     string income_STR = floatToStr(curMonAnalytics.income + amount);
 
     string new_application_STR = to_string(curMonAnalytics.new_application_count + (applicationType.compare(appTypeAPL) == 0));
