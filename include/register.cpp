@@ -168,6 +168,33 @@ void getRegisterCarPlate(user &userObj) {
 
 }
 
+void REGUpdateAnalytics () {
+    analytic curMonAnalytics;
+    int nextLine = 0;
+
+    if (!searchAnalytics(curMonAnalytics, 202604, nextLine)) {
+        curMonAnalytics.month = 202604;
+        curMonAnalytics.extension_count = 0;
+        curMonAnalytics.income = 0;
+        curMonAnalytics.new_application_count = 0;
+        curMonAnalytics.new_user_count = 0;
+        curMonAnalytics.line = nextLine;
+        
+        fstream analyticFile(ANALYTICS_FILE);
+        writeAnalytic(analyticFile, curMonAnalytics);
+
+        analyticFile.close();
+    }
+
+    string newUserCountStr = to_string(curMonAnalytics.new_user_count + 1);
+
+    fstream analyticFile(ANALYTICS_FILE);
+
+    edit(analyticFile, curMonAnalytics.line, curMonAnalytics.lineSize, curMonAnalytics.new_user_count_Attr, newUserCountStr);
+
+    analyticFile.close();
+}
+
 bool confirmRegister(user registerUser) {
     
     cout << endl << "CONFIRM INFO YOUR INFORMATION" << endl;
@@ -237,6 +264,7 @@ void registerUser() {
         fstream userFile(USER_FILE);
 
         writeUser(userFile, userObj);
+        REGUpdateAnalytics();
         userFile.close();
 
         cout << "REGISTERED USER - " << userObj.name << endl;

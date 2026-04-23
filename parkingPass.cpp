@@ -7,6 +7,7 @@
 #include "header/login.h"
 #include "header/register.h"
 #include "header/checkPass.h"
+#include "header/user.h"
 
 using namespace std;
 
@@ -34,12 +35,13 @@ int main () {
         switch (choice) {
             case '1':
                 if (loginUser(userObj)) {
-                    cout << "ENTER USER UI AS " << userObj.name << endl;
+                    cout << "ENTERING USER UI AS " << userObj.name << endl << endl;
+                    userUI(userObj);
                 } 
                 break;
             case '2':
                 if (loginAdmin(adminObj)) {
-                    cout << "ENTER ADMIN UI AS " << adminObj.name << endl;
+                    cout << "ENTERING ADMIN UI AS " << adminObj.name << endl << endl;
                 }
                 break;
             case '3':

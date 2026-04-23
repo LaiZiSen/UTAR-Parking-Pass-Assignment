@@ -231,6 +231,28 @@ bool removeRecord(fstream &file, int line, int lineSize) {
     return true;
 }
 
+bool searchCarPlate(string carPlate) {
+    fstream userFile(USER_FILE);
+    user userObj;
+
+    bool foundCarPlate = false;
+    while(!userFile.eof() && !foundCarPlate) {
+        RESULT result = getUser(userFile, userObj, 0);\
+
+        if(result != VALID_RECORD) continue;
+        
+        if(userObj.car_plate.compare(carPlate) == 0) {
+            userFile.close();
+            return true;
+        } else {
+            continue;
+        };
+    }
+    return false;
+
+    userFile.close();
+}
+
 bool searchUser(user &outputUser, string inputName) {
     fstream userFile(USER_FILE);
     int lineNum = 0;
@@ -250,28 +272,6 @@ bool searchUser(user &outputUser, string inputName) {
 
         if(username.compare(inputName) == 0) {
             outputUser = userObj; 
-            userFile.close();
-            return true;
-        } else {
-            continue;
-        };
-    }
-    return false;
-
-    userFile.close();
-}
-
-bool searchCarPlate(string carPlate) {
-    fstream userFile(USER_FILE);
-    user userObj;
-
-    bool foundCarPlate = false;
-    while(!userFile.eof() && !foundCarPlate) {
-        RESULT result = getUser(userFile, userObj, 0);\
-
-        if(result != VALID_RECORD) continue;
-        
-        if(userObj.car_plate.compare(carPlate) == 0) {
             userFile.close();
             return true;
         } else {
@@ -311,6 +311,34 @@ bool searchAdmin(admin &outputAdmin, string inputName) {
     return false;
 
     adminFile.close();
+}
+
+
+bool searchAnalytics(analytic &outputAnalytic, int yearMonth, int &nextLine) {
+    fstream analyticFile(ANALYTICS_FILE);
+    int lineNum = 0;
+    analytic analyticObj;
+    
+
+    bool foundUser = false;
+    while(!analyticFile.eof() && !foundUser) {
+        RESULT result = getAnalytic(analyticFile, analyticObj, lineNum);
+        lineNum++;
+
+        if(result != VALID_RECORD) continue;
+        
+        if(analyticObj.month == yearMonth) {
+            outputAnalytic = analyticObj; 
+            analyticFile.close();
+            return true;
+        } else {
+            continue;
+        };
+    }
+    nextLine = lineNum;
+    return false;
+
+    analyticFile.close();
 }
 
 string  strLengthEnforcer(string targetStr, int fillSize) {

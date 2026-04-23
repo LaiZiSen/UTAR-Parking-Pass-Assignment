@@ -11,7 +11,7 @@ git clone [doc link]
 ```
 git fetch
 git status (check for updates)
-git pull
+git pull (if need to update)
 ```
 
 ### Committing changes
