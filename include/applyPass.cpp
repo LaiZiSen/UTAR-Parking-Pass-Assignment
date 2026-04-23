@@ -15,8 +15,11 @@ bool decideCarPlate(application &applicationDetail, user &userData, int curYYYYM
 
     cout << "Do you want to RENEW PASS for [" << trim(userData.car_plate) << "]?" << endl << endl;
     
-    while (true) {
-        cout << "(1) RENEW FOR [" << trim(userData.car_plate) << ']' <<  endl;
+    bool decided = false;
+    while (!decided) {
+        string action = (userData.pass == 0) ? "APPLY" : "RENEW";
+
+        cout << "(1) " << action <<" FOR [" << trim(userData.car_plate) << ']' <<  endl;
         cout << "(2) APPLY PASS for new carplate" << endl << endl;
         choice = getChoice();
         string newCarPlate = "";
@@ -26,14 +29,14 @@ bool decideCarPlate(application &applicationDetail, user &userData, int curYYYYM
                 applicationDetail.car_plate = userData.car_plate;
 
                 if (userData.pass < curYYYYMM) {
-                    applicationDetail.type = appTypeRNW;
-                } else applicationDetail.type = appTypeAPL;
+                    applicationDetail.type = appTypeAPL;
+                } else applicationDetail.type = appTypeRNW;
 
                 if ((userData.pass) >= (curYYYYMM+3)) {
                     return false;
                 }
 
-                break;
+                return true;
 
             case '2':
                 cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
