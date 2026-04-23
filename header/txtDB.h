@@ -124,6 +124,7 @@ bool removeRecord(std::fstream &file, int line, int lineSize);
 bool searchCarPlate(std::string carPlate);
 bool searchUser(user &outputUser, std::string inputName);
 bool searchAdmin(admin &outputAdmin, std::string inputName);
+bool searchAnalytics(analytic &outputAnalytic, int yearMonth, int &nextLine);
 
 std::string  strLengthEnforcer(std::string targetStr, int fillSize);
 std::string trim(const std::string& input);

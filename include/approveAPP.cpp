@@ -45,9 +45,37 @@ void approve(fstream &file, application applicationData) {
     edit(file, applicationData.line, applicationData.lineSize, applicationData.status_Attr, appStatusAPV);
 }
 
+void RFDUpdateAnalytics (float amount) {
+    analytic curMonAnalytics;
+    int nextLine = 0;
+
+    if (!searchAnalytics(curMonAnalytics, 202604, nextLine)) {
+        curMonAnalytics.month = 202604;
+        curMonAnalytics.extension_count = 0;
+        curMonAnalytics.income = 0;
+        curMonAnalytics.new_application_count = 0;
+        curMonAnalytics.new_user_count = 0;
+        curMonAnalytics.line = nextLine;
+        
+        fstream analyticFile(ANALYTICS_FILE);
+        writeAnalytic(analyticFile, curMonAnalytics);
+
+        analyticFile.close();
+    }
+
+    string amountStr = floatToStr(curMonAnalytics.income - amount);
+
+    fstream analyticFile(ANALYTICS_FILE);
+
+    edit(analyticFile, curMonAnalytics.line, curMonAnalytics.lineSize, curMonAnalytics.income_Attr, amountStr);
+
+    analyticFile.close();
+}
+
 void reject(fstream &file, application applicationData) {
+    file.clear();
     edit(file, applicationData.line, applicationData.lineSize, applicationData.status_Attr, appStatusRJT);
-    
+
     fstream transFile(TRANSACTION_FILE);
 
     transaction rfdTransaction;
@@ -57,6 +85,7 @@ void reject(fstream &file, application applicationData) {
     rfdTransaction.trans_type = transTypeRFD;
 
     writeTransaction(transFile, rfdTransaction);
+    RFDUpdateAnalytics(rfdTransaction.amount);
     transFile.close();
 }
 
