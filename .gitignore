@@ -2,6 +2,7 @@
 junk/
 build/
 db/
+testDB/
 test.cpp
 .vscode/
 testDB/

@@ -313,7 +313,6 @@ bool searchAdmin(admin &outputAdmin, string inputName) {
     adminFile.close();
 }
 
-
 bool searchAnalytics(analytic &outputAnalytic, int yearMonth, int &nextLine) {
     fstream analyticFile(ANALYTICS_FILE);
     int lineNum = 0;

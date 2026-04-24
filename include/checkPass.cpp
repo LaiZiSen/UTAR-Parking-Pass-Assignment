@@ -74,7 +74,6 @@ void checkPass() {
     user userSample;
 
     do{
-        cout << '[' <<validCarPlateList.curNode->carPlate << ']' << endl << endl;
         validCarPlateList.curNode = validCarPlateList.curNode->nextNode;
     } while(validCarPlateList.curNode != nullptr);
 
@@ -86,8 +85,6 @@ void checkPass() {
         carPlate = trim(carPlate);
         carPlate = strLengthEnforcer(carPlate, userSample.car_plate_Attr.size);
         transform(carPlate.begin(), carPlate.end(), carPlate.begin(), ::toupper);
-
-        cout << "inputed [" << carPlate << ']' << endl;
 
         bool isValidCarPlate = false;
         validCarPlateList.curNode = validCarPlateList.headNode;
@@ -123,8 +120,3 @@ void checkPass() {
         }
     }
 }
-
-// int main () {
-//     checkPass();
-//     return 0;
-// }

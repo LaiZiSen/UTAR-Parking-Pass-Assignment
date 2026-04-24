@@ -272,7 +272,3 @@ void registerUser() {
         cout << "FAILED TO REGISTER USER, EXITING TO MAIN MENU" << endl;
     }
 }
-
-// int main () {
-//     registerUser();
-// }

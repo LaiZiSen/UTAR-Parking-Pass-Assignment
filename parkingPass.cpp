@@ -8,6 +8,7 @@
 #include "header/register.h"
 #include "header/checkPass.h"
 #include "header/user.h"
+#include "header/admin.h"
 
 using namespace std;
 
@@ -21,8 +22,7 @@ void printGeneralMenu() {
     cout << "5. Exit Program" << endl << endl;
 }
 
-int main () {
-    
+int main () {    
     bool progRunning = true;
 
     char choice;
@@ -42,6 +42,7 @@ int main () {
             case '2':
                 if (loginAdmin(adminObj)) {
                     cout << "ENTERING ADMIN UI AS " << adminObj.name << endl << endl;
+                    adminUI(adminObj);
                 }
                 break;
             case '3':
@@ -59,4 +60,5 @@ int main () {
                 break;
         }
     }
+    return 0;
 }
