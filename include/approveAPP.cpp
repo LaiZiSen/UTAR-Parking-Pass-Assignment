@@ -90,7 +90,7 @@ void reject(fstream &file, application applicationData) {
 }
 
 void approveAPP() {
-    cout << "Approve applications !" << endl;
+    cout << endl << "=========== Approve applications ===========" << endl;
 
     fstream applicationFile(APPLICATION_FILE);
     int lineNum = 0;

@@ -8,21 +8,7 @@
 
 using namespace std;
 
-void displayApplicationDetails(application applicationDetail) {
-    tm appliedPassTM;
-    char appliedPassStr[50];
-    appliedPassTM.tm_year = applicationDetail.pass_application / 100 - 1900;
-    appliedPassTM.tm_mon = applicationDetail.pass_application % 100 -1;
-    strftime(appliedPassStr, 50, "%b %Y", &appliedPassTM);
-
-    cout << endl;
-    cout<<left<<setw(20)<<"Name"<<": "<<trim(applicationDetail.username)<<endl;
-    cout<<left<<setw(20)<<"Status"<<": "<<trim(applicationDetail.status)<<endl;
-    cout<<left<<setw(20)<<"Pass Applied"<<": "<<appliedPassStr<<endl;
-    cout<<left<<setw(20)<<"Car plate applied"<<": "<<trim(applicationDetail.car_plate)<<endl;
-}
-
-void approveApplication() {
+void applyApplications() {
     fstream applicationFile(APPLICATION_FILE);
     fstream userFile(USER_FILE);
 
@@ -32,14 +18,11 @@ void approveApplication() {
         RESULT fetchResult = getApplication(applicationFile, applicationObj, lineNum);
         lineNum++;
 
-        cout << lineNum << '\t';
-
         if (fetchResult == INVALID_RECORD) {
             continue;
         }
 
         if(fetchResult == END_OF_FILE) {
-            cout << "END OF FILE";
             break;
         }
 
@@ -88,10 +71,4 @@ void approveApplication() {
     applicationFile.write(strLengthEnforcer("", applicationObj.lineSize-2).c_str(), applicationObj.lineSize -2);
 
     cout << endl << "APPROVED APPLICATIONS HAVE BEEN APPLIED" << endl;
-}
-
-
-
-int main () {
-    approveApplication();
 }

@@ -4,6 +4,7 @@
 #include "../header/txtPath.h"
 #include "../header/approveAPP.h"
 #include "../header/checkAnalytics.h"
+#include "../header/applyApplication.h"
 
 using namespace std;
 
@@ -27,7 +28,7 @@ char getOption(){
 }
 
 void adminUI(admin adminData) {
-    cout << endl << "WELCOME" << adminData.name << endl;
+    cout << endl << "WELCOME " << adminData.name << endl;
 
     bool loggedIn = true;
     while(loggedIn) {
@@ -41,7 +42,7 @@ void adminUI(admin adminData) {
                 approveAPP();
                 break;
             case '2':
-                cout << endl << "Apply Applications" << endl;
+                applyApplications();
                 break;
             case '3':
                 checkAnalytics();
