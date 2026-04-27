@@ -77,12 +77,13 @@ void checkPass() {
         validCarPlateList.curNode = validCarPlateList.curNode->nextNode;
     } while(validCarPlateList.curNode != nullptr);
 
+    cout<< endl << "--------Check Vehichal Pass--------"<<endl << endl;
     while (true)
     {
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         cout << "ENTER CARPLATE:  ";
         string carPlate = getLineInput(userSample.car_plate_Attr);
-        carPlate = trim(carPlate);
+        carPlate = removeSpaces(carPlate);
         carPlate = strLengthEnforcer(carPlate, userSample.car_plate_Attr.size);
         transform(carPlate.begin(), carPlate.end(), carPlate.begin(), ::toupper);
 
@@ -97,8 +98,8 @@ void checkPass() {
         }        
 
         if (isValidCarPlate) {
-            cout << endl << "CAR PALTE IS VALID !!" << endl;
-        } else {cout << endl << "CAR PLATE IS NOT VALID !!" << endl;}
+            cout << endl << "CAR PALTE IS VALID !!" << endl << endl;
+        } else {cout << endl << "CAR PLATE IS NOT VALID !!" << endl << endl;}
 
         bool loopDone = false;
         
@@ -111,6 +112,7 @@ void checkPass() {
             
             switch (choice) {
                 case '1':
+                    cout << endl;
                     loopDone = true;
                     break;
                 case '2':

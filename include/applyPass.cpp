@@ -277,13 +277,3 @@ void applyPass(user userData) {
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     cin.get();
 }
-
-// int main () {
-
-//     fstream userFile(USER_FILE);
-//     user userobj;
-
-//     getUser(userFile, userobj, 0);
-
-//     applyPass(userobj);
-// }

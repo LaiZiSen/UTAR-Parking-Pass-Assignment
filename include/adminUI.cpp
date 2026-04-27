@@ -10,7 +10,7 @@ using namespace std;
 
 void printAdminMenu() {
     cout << endl;
-    cout << "Menu" << endl;
+    cout<<"--------Admin Menu Choice--------"<<endl;
     cout << "1. Approve Applications" << endl;
     cout << "2. Apply Applications" << endl;
     cout << "3. Check Analytics" << endl;

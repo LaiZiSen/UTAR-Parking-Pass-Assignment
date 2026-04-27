@@ -137,16 +137,5 @@ void checkAnalytics() {
                 break;
             }
         }
-
-
-
-        // get choice
-        // 1 go to previous record
-        // 2 go to next record
-        // 3 quit
     }
 }
-
-// int main () {
-//     checkAnalytics();
-// }

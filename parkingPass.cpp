@@ -14,7 +14,7 @@ using namespace std;
 
 void printGeneralMenu() {
     cout << endl;
-    cout << "General Menu" << endl;
+    cout<<"--------Main Menu Choice--------"<<endl;
     cout << "1. Login as User" << endl;
     cout << "2. Login as Admin" << endl;
     cout << "3. Register" << endl; 
@@ -56,7 +56,7 @@ int main () {
                 progRunning = false;
                 break;
             default:
-                cout << "Invalid option, enter anotehr number" << endl;
+                cout << "Invalid option, enter another number" << endl;
                 break;
         }
     }
