@@ -77,7 +77,7 @@ void checkPass() {
         validCarPlateList.curNode = validCarPlateList.curNode->nextNode;
     } while(validCarPlateList.curNode != nullptr);
 
-    cout<< endl << "--------Check Vehichal Pass--------"<<endl << endl;
+    cout<< endl << "--------Check Vehichle Pass--------"<<endl << endl;
     while (true)
     {
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
