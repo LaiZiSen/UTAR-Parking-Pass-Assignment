@@ -37,9 +37,9 @@ void checkTransHistory(string username){
 
                 string trans_type;
                 if(tempTrans.trans_type=="INC"){
-                    trans_type="+ RM";
-                }else if(tempTrans.trans_type=="RFD"){
                     trans_type="- RM";
+                }else if(tempTrans.trans_type=="RFD"){
+                    trans_type="+ RM";
                 }
                 cout<<left<<setw(20)<<trim(to_string(tempTrans.date))<<fixed<<setprecision(2)<<trans_type<<(tempTrans.amount)<<endl;
             }
