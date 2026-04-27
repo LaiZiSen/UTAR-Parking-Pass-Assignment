@@ -198,11 +198,11 @@ void REGUpdateAnalytics () {
 bool confirmRegister(user registerUser) {
     
     cout << endl << "CONFIRM INFO YOUR INFORMATION" << endl;
-    cout << "USERNAME: [" << registerUser.name << "]" << endl;
-    cout << "PASSWORD: [" << registerUser.pwd << "]" << endl;
-    cout << "STUDENT ID: [" << registerUser.id << "]" << endl;
-    cout << "FACULTY: [" << registerUser.faculty << "]" << endl;
-    cout << "CAR PLATE: [" << registerUser.car_plate << "]" << endl;
+    cout << "USERNAME: [" << trim(registerUser.name) << "]" << endl;
+    cout << "PASSWORD: [" << trim(registerUser.pwd) << "]" << endl;
+    cout << "STUDENT ID: [" << trim(to_string(registerUser.id)) << "]" << endl;
+    cout << "FACULTY: [" << trim(registerUser.faculty) << "]" << endl;
+    cout << "CAR PLATE: [" << trim(registerUser.car_plate) << "]" << endl;
 
     while (true) {
         cout << endl << "Is all of your information correct?" << endl;

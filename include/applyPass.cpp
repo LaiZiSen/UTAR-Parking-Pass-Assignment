@@ -13,7 +13,9 @@
 bool decideCarPlate(application &applicationDetail, user &userData, int curYYYYMM) {
     char choice;
 
-    cout << "Do you want to RENEW PASS for [" << trim(userData.car_plate) << "]?" << endl << endl;
+    string action = (userData.pass == 0) ? "APPLY" : "RENEW";
+
+    cout << "(1) " << action <<" FOR [" << trim(userData.car_plate) << ']' <<  endl;
     
     bool decided = false;
     while (!decided) {
@@ -141,9 +143,6 @@ void APPLUpdateAnalytics (int monthsApplied, string applicationType, float amoun
     string income_STR = floatToStr(curMonAnalytics.income + amount);
 
     string new_application_STR = to_string(curMonAnalytics.new_application_count + (applicationType.compare(appTypeAPL) == 0));
-
-
-    cout << extension_count_STR + income_STR + new_application_STR << endl;
 
     fstream analyticFile(ANALYTICS_FILE);
 
