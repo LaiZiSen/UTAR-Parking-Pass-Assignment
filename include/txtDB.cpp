@@ -313,6 +313,27 @@ bool searchAdmin(admin &outputAdmin, string inputName) {
     adminFile.close();
 }
 
+bool searchApplication(fstream &applicationFile, string username) {
+    application applicationObj;
+
+    bool foundApplication = false;
+    while(!applicationFile.eof() && !foundApplication) {
+        RESULT result = getApplication(applicationFile, applicationObj, 0);
+
+        if(result != VALID_RECORD) continue;
+        
+        if(applicationObj.username.compare(username) == 0) {
+            applicationFile.close();
+            return true;
+        } else {
+            continue;
+        };
+    }
+    return false;
+
+    applicationFile.clear();
+}
+
 bool searchAnalytics(analytic &outputAnalytic, int yearMonth, int &nextLine) {
     fstream analyticFile(ANALYTICS_FILE);
     int lineNum = 0;

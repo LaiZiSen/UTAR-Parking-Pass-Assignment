@@ -111,27 +111,6 @@ bool confirmPayment(transaction applicationTransaction) {
 
 }
 
-bool searchApplication(fstream &applicationFile, string username) {
-    application applicationObj;
-
-    bool foundApplication = false;
-    while(!applicationFile.eof() && !foundApplication) {
-        RESULT result = getApplication(applicationFile, applicationObj, 0);
-
-        if(result != VALID_RECORD) continue;
-        
-        if(applicationObj.username.compare(username) == 0) {
-            applicationFile.close();
-            return true;
-        } else {
-            continue;
-        };
-    }
-    return false;
-
-    applicationFile.clear();
-}
-
 void endProgram() {
     cout << endl <<  "Enter to return to User Menu";
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');

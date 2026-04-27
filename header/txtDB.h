@@ -125,6 +125,7 @@ bool searchCarPlate(std::string carPlate);
 bool searchUser(user &outputUser, std::string inputName);
 bool searchAdmin(admin &outputAdmin, std::string inputName);
 bool searchAnalytics(analytic &outputAnalytic, int yearMonth, int &nextLine);
+bool searchApplication(std::fstream &applicationFile, std::string username);
 
 std::string  strLengthEnforcer(std::string targetStr, int fillSize);
 std::string trim(const std::string& input);

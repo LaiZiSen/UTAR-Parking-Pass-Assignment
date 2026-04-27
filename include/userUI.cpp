@@ -9,6 +9,26 @@
 
 using namespace std;
 
+void usePopup(user userData) {
+    int currYearMonth = getCurrYearMonth();
+    // cout << userData.pass<< "   " << getCurrYearMonth();
+
+    fstream applicationFile(APPLICATION_FILE);
+    
+    if (searchApplication(applicationFile, userData.name)) {
+        return;
+    }
+
+    if (userData.pass == 0) {
+        cout << endl << "!!!! APPLY FOR YOUR FIRST PASS NOW !!!!" << endl << endl;
+    } else if (userData.pass < currYearMonth) {
+        cout << endl << "!!!! APPLY FOR ANOTHER PASS NOW !!!!" << endl << endl;
+    } else if (userData.pass == currYearMonth && getCurrDay() > 20) {
+        cout << endl << "!!!! YOUR PASS WILL EXPIRE SOON | APPLY FOR EXTENSION NOW !!!!" << endl << endl;
+    }
+    cout<<"--------------------------------"<<endl;
+    return;
+}
 
 void userUI(user userData){
     bool running = true;
@@ -17,6 +37,9 @@ void userUI(user userData){
         char choice, mainMenu;
         
         cout<<"--------User Menu Choice--------"<<endl;
+
+        usePopup(userData);
+
         cout<<"1. Apply"<<endl;
         cout<<"2. Check Application Status"<<endl;
         cout<<"3. Check Transaction History"<<endl;
