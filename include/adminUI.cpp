@@ -2,10 +2,8 @@
 #include <fstream>
 #include "../header/txtDB.h"
 #include "../header/txtPath.h"
-#include "../header/approveAPP.h"
-#include "../header/checkAnalytics.h"
-#include "../header/applyApplication.h"
 #include "../header/generalFunc.h"
+#include "../header/admin.h"
 
 using namespace std;
 
