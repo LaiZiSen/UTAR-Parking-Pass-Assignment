@@ -68,7 +68,6 @@ void checkAppStatus(user userObj){
                 strftime(applyDateStr, 50, "%d/%m/%Y", &applyDateTM);
                 
                 cout<<left<<setw(20)<<"Name"<<": "<<trim(tempApp.username)<<endl;
-                cout<<left<<setw(20)<<"Current Pass"<<": "<<curPassStr<<endl;
                 cout<<left<<setw(20)<<"Pass Applied"<<": "<<appliedPassStr<<endl;
                 cout<<left<<setw(20)<<"Car plate applied"<<": "<<trim(tempApp.car_plate)<<endl;
                 cout<<left<<setw(20)<<"Type"<<": "<<type<<endl;
