@@ -131,7 +131,7 @@ void checkAnalytics() {
                 break;
     
             case '3':
-                cout << endl << "Quiting Check Analysis" << endl;
+                cout << endl << "Quiting Check Analytics" << endl;
                 choiceDone = true;
                 done = true;
                 break;
