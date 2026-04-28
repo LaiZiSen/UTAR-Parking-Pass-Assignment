@@ -35,13 +35,20 @@ void checkTransHistory(string username){
             validRecord = true;
             if(trim(tempTrans.username)==trim(username)){
 
+                tm transDateTM;
+                char transDateStr[50];
+                transDateTM.tm_year = tempTrans.date / 10000 + 100;
+                transDateTM.tm_mon = (tempTrans.date / 100) % 100 - 1;
+                transDateTM.tm_mday = tempTrans.date % 100 - 1;
+                strftime(transDateStr, 50, "%d/%m/%Y", &transDateTM);
+
                 string trans_type;
                 if(tempTrans.trans_type=="INC"){
                     trans_type="- RM";
                 }else if(tempTrans.trans_type=="RFD"){
                     trans_type="+ RM";
                 }
-                cout<<left<<setw(20)<<trim(to_string(tempTrans.date))<<fixed<<setprecision(2)<<trans_type<<(tempTrans.amount)<<endl;
+                cout<<left<<setw(20)<<trim(transDateStr)<<fixed<<setprecision(2)<<trans_type<<(tempTrans.amount)<<endl;
             }
         }
         lineNum++;
