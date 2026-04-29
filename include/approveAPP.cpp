@@ -30,15 +30,17 @@ float getRFDAmount(fstream &transFile, application applicationData) {
 
     transaction transactionObj;
     int lineNum;
+    float returnAmount = 0;
     while (!transFile.eof())
     {
         getTransaction(transFile, transactionObj, lineNum);
 
         if (transactionObj.username.compare(applicationData.username) == 0) {
-            return transactionObj.amount;
+            returnAmount = transactionObj.amount;
         }
     }
-    return 0;
+    transFile.clear();
+    return returnAmount;
 }
 
 void approve(fstream &file, application applicationData) {
@@ -78,6 +80,7 @@ void reject(fstream &file, application applicationData) {
     edit(file, applicationData.line, applicationData.lineSize, applicationData.status_Attr, appStatusRJT);
 
     fstream transFile(TRANSACTION_FILE);
+    file.clear();
 
     transaction rfdTransaction;
     rfdTransaction.username = applicationData.username;
