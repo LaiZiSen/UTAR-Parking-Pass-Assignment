@@ -54,8 +54,8 @@ void getRegisterPassword(user &userObj) {
         cin >> userObj.pwd;
         userObj.pwd = removeSpaces(userObj.pwd);
 
-        if (userObj.pwd.length() < userObj.pwd_Attr.size) {
-            cout << "INVALID PASSWORD" << endl;
+        if (userObj.pwd.length() != userObj.pwd_Attr.size) {
+            cout << "INVALID PASSWORD LENGTH" << endl;
         } else {break;}
     }
 
