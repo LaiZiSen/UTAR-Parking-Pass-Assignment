@@ -50,8 +50,8 @@ void RFDUpdateAnalytics (float amount) {
     analytic curMonAnalytics;
     int nextLine = 0;
 
-    if (!searchAnalytics(curMonAnalytics, 202604, nextLine)) {
-        curMonAnalytics.month = 202604;
+    if (!searchAnalytics(curMonAnalytics, getCurrYearMonth(), nextLine)) {
+        curMonAnalytics.month = getCurrYearMonth();
         curMonAnalytics.extension_count = 0;
         curMonAnalytics.income = 0;
         curMonAnalytics.new_application_count = 0;

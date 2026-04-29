@@ -9,13 +9,30 @@
 #include "../header/generalFunc.h"
 #include "../header/settings.h"
 
+bool searchCarPlateInApplication(string carPlate) {
+    fstream applicationFile(APPLICATION_FILE);
+    application applicationObj;
+
+    bool foundCarPlate = false;
+    while(!applicationFile.eof() && !foundCarPlate) {
+        RESULT result = getApplication(applicationFile, applicationObj, 0);\
+
+        if(result != VALID_RECORD) continue;
+        
+        if(applicationObj.car_plate.compare(carPlate) == 0) {
+            applicationFile.close();
+            return true;
+        } else {
+            continue;
+        };
+    }
+    return false;
+
+    applicationFile.close();
+}
 
 bool decideCarPlate(application &applicationDetail, user &userData, int curYYYYMM) {
     char choice;
-
-    string action = (userData.pass == 0) ? "APPLY" : "RENEW";
-
-    cout << "(1) " << action <<" FOR [" << trim(userData.car_plate) << ']' <<  endl;
     
     bool decided = false;
     while (!decided) {
@@ -51,7 +68,7 @@ bool decideCarPlate(application &applicationDetail, user &userData, int curYYYYM
 
 
                     if (newCarPlate.length() > 0) {
-                        if (!searchCarPlate(newCarPlate)) {
+                        if (!searchCarPlate(newCarPlate) && !searchCarPlateInApplication(newCarPlate)) {
                             applicationDetail.car_plate = newCarPlate;
                             break;
                         } else {
@@ -125,8 +142,8 @@ void APPLUpdateAnalytics (int monthsApplied, string applicationType, float amoun
     analytic curMonAnalytics;
     int nextLine = 0;
 
-    if (!searchAnalytics(curMonAnalytics, 202604, nextLine)) {
-        curMonAnalytics.month = 202604;
+    if (!searchAnalytics(curMonAnalytics, getCurrYearMonth(), nextLine)) {
+        curMonAnalytics.month = getCurrYearMonth();
         curMonAnalytics.extension_count = 0;
         curMonAnalytics.income = 0;
         curMonAnalytics.new_application_count = 0;

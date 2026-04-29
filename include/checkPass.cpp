@@ -98,8 +98,8 @@ void checkPass() {
         }        
 
         if (isValidCarPlate) {
-            cout << endl << "PASS IS ACTIVE FOR [" << carPlate << ']' << endl << endl;
-        } else {cout << endl << "PASS IS NOT ACTIVE FOR [" << carPlate << ']' << endl << endl;}
+            cout << endl << "PASS IS ACTIVE FOR [" << trim(carPlate) << ']' << endl << endl;
+        } else {cout << endl << "PASS IS NOT ACTIVE FOR [" << trim(carPlate) << ']' << endl << endl;}
 
         bool loopDone = false;
         
