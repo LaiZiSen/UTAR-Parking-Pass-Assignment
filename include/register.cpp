@@ -150,8 +150,9 @@ void getRegisterCarPlate(user &userObj) {
     string carPlate;
 
     while (true) {
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
         cout <<  endl <<"Enter Your Car Plate:  ";
-        cin >> carPlate;
+        carPlate = getLineInput(userObj.car_plate_Attr);
         
         transform(carPlate.begin(), carPlate.end(), carPlate.begin(), ::toupper);
     
